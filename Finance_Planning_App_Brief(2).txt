@@ -1,0 +1,201 @@
+PERSONAL FINANCE PLANNING APP — PRODUCT BRIEF v1.0
+===================================================
+Platform: iOS (SwiftUI)
+Distribution: TestFlight initially
+Users: Solo or household (2 people) — configured at setup
+Currency: Euros (€)
+
+
+OVERVIEW
+--------
+A big picture personal finance planning app that replaces a complex Google Sheets budget tracker. The core purpose is to make monthly financial planning intuitive, flexible, and easy to maintain — with the ability to zoom out and see the full year. Built for one person or a household of two, with variable incomes and real life surprise expenses in mind.
+
+The problem it solves: planned budgets never match reality because unexpected expenses pop up and the current spreadsheet is too rigid and tedious to update. This app makes replanning easy and handles surprises gracefully.
+
+
+BUDGETING PHILOSOPHY
+--------------------
+At setup, the user chooses a budgeting framework. The app recommends one based on their situation but any can be selected:
+
+• 50/30/20 — Needs / Wants / Savings (default recommendation)
+• 70/20/10 — more relaxed, less savings pressure
+• Zero-based — assign every euro a job
+• Pay yourself first — savings deducted first, spend the rest
+• Custom — user sets their own percentages
+
+The chosen framework is the backbone of all planning and reporting. Percentages are shown in real time as the user plans.
+
+
+HOUSEHOLD SETUP
+---------------
+At onboarding the user chooses:
+• Solo mode — one person's income and expenses
+• Household mode — two people (e.g. Guppy + Chappy), each with their own income and accounts, plus a joint account
+
+In household mode:
+• Each person's income is entered separately
+• Expenses are tagged as Person 1, Person 2, or Joint
+• The joint account is tracked separately
+• Both individual and household totals are visible
+
+
+INCOME
+------
+• Each person's income is entered separately each month
+• Income is variable — no fixed amount assumed
+• Multiple income sources per person supported (e.g. main job + side income)
+• Total household income calculated automatically
+
+
+EXPENSE STRUCTURE
+-----------------
+Expenses are organised into the three buckets of the chosen framework (e.g. Needs / Wants / Savings). Within each bucket, categories are customisable. 
+
+Default categories based on current usage:
+
+Needs:
+• Rent
+• Gas
+• Strom (electricity)
+• Internet
+• Rundfunkbeitrag
+• Phone bills (per person)
+• Insurance (per person)
+• Groceries
+• Semester fees
+• DE-Ticket
+• Liability insurance
+• Berliner Mieterverein
+• Medical / Healing (Derm, Psychiatrist, Psychotherapy)
+• Sachiko & Beanie expenses (insurance, food, vet)
+
+Wants:
+• Leisure
+• Personal money (per person)
+• Skincare
+• Travel
+• Wellness (badminton, gym, etc.)
+• Donations
+• Subscriptions (iCloud, Spotify, ChatGPT, Google, N26, etc.)
+
+Savings & Investments:
+• Savings
+• Investments (tracked by type — stocks, property, etc.)
+
+
+INSTALMENT TRACKING
+-------------------
+One-off large expenses can be split across multiple months:
+• User enters total amount + number of months to spread it across
+• App automatically allocates the monthly portion
+• Shown clearly as an instalment in the monthly plan
+• Examples: flight tickets, Airbnb deposits, Faroe Islands trip, Chiko wheel, glasses
+
+
+TENTATIVE / PROSPECTIVE EXPENSES
+---------------------------------
+• Users can add future or unconfirmed expenses marked as "tentative"
+• Tentative expenses are visible in planning but flagged differently from confirmed ones
+• Can be confirmed or removed as the month approaches
+• Yearly expenses (e.g. Berliner Mieterverein, liability insurance) can be entered once and distributed across the relevant months automatically
+
+
+SURPRISE EXPENSE HANDLING
+--------------------------
+When an unexpected expense comes up mid-month:
+• User logs the expense and tags it to a category
+• App shows the impact on the affected bucket
+• App suggests where the money could come from (e.g. "take from leisure budget" or "reduce travel allocation this month")
+• User makes the final decision
+• Plan updates automatically to reflect the change
+
+
+TIME VIEWS
+----------
+The app supports three views:
+• Monthly — plan and track one month at a time
+• Multi-month — see several months side by side
+• Full year — zoom out to see the entire year at a glance
+
+In all views, both planned and actual figures are shown side by side.
+
+
+PLANNED VS ACTUAL
+-----------------
+• Every expense category shows planned amount vs actual spent
+• Variance is highlighted (over/under)
+• Bucket-level percentages shown in real time (e.g. "currently 58% on Needs")
+• App flags when a bucket is overspending against the chosen framework
+
+
+UNSPENT BUDGET
+--------------
+At the end of each month, any unspent budget per category is surfaced. The app suggests what to do with it (e.g. roll into savings, carry forward, allocate to a goal) and the user decides.
+
+
+SAVINGS & INVESTMENTS
+---------------------
+• Savings and investments tracked separately
+• Investments broken down by type (e.g. stocks, property)
+• Target percentages set at setup based on chosen framework
+• Progress shown against targets month by month and year to date
+
+
+YEARLY EXPENSES
+---------------
+Some expenses occur annually or quarterly rather than monthly:
+• Can be entered once with their recurrence schedule
+• App distributes them across the correct months automatically
+• Examples: Rundfunkbeitrag (quarterly), liability insurance (annual), semester fees (per semester)
+
+
+NAVIGATION
+----------
+
+The app has 4 tabs:
+
+1. HOME
+   The current month at a glance. Live tracking of how the month is going — income, bucket percentages, planned vs actual. Includes a persistent "Something came up?" button that launches the surprise expense flow without leaving the screen.
+
+2. PLANNING
+   The monthly sit-down. Allocate income across categories, set budgets, manage instalments, configure savings and investments. This is where you plan the month before it starts and adjust mid-month when needed. Also includes buffer / emergency pot allocation and tentative / prospective expenses.
+
+3. REVIEW
+   All history in one place. See any past month's performance — planned vs actual, bucket breakdowns, percentage splits. Zoom out to full year view to see trends across months. Locked data — no editing, just reviewing.
+
+4. SETTINGS
+   App configuration. Household or solo setup, budgeting framework selection, category management, account setup.
+
+
+SECONDARY SCREENS (accessed from within tabs)
+----------------------------------------------
+• Onboarding — household or solo setup, income entry, framework selection
+• Surprise expense handler — log unexpected cost, see impact, app suggests reallocation options, user decides
+• Add / edit category — create or adjust a budget category
+• Add instalment — enter large expense, set number of months to split across
+• Yearly / recurring expense setup — enter annual or quarterly expenses, app distributes across correct months
+• Add tentative expense — flag a future or unconfirmed cost
+• Buffer setup — allocate monthly reserve for unknowns like Nachzahlung
+
+
+WHAT MAKES IT DIFFERENT FROM THE SPREADSHEET
+---------------------------------------------
+• Variable income handled gracefully — replanning is easy each month
+• Surprise expenses don't break the plan — app guides you through reallocation
+• Real time percentages — always know which bucket you're in
+• Instalment tracking built in — no manual splitting across months
+• Zoom in and out — monthly detail or full year view
+• Planned vs actual always visible — no hunting through rows and columns
+
+
+NOTES FOR AI BUILDER
+--------------------
+Design will be provided separately as a mockup. Technical decisions (storage, data model, backend) to be decided collaboratively during build.
+
+
+WHAT IT'S NOT
+-------------
+• Not a daily transaction tracker (see separate Daily Budgeting App brief)
+• Not a bank API integration
+• Not an investment portfolio manager
+• Not on the App Store in v1

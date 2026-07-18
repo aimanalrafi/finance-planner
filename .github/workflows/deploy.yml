@@ -1,0 +1,41 @@
+name: Deploy
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: production-deploy
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set up SSH
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.DEPLOY_SSH_KEY }}" > ~/.ssh/id_ed25519
+          chmod 600 ~/.ssh/id_ed25519
+          echo "${{ secrets.DEPLOY_KNOWN_HOSTS }}" >> ~/.ssh/known_hosts
+
+      - name: Deploy over SSH
+        run: |
+          ssh -i ~/.ssh/id_ed25519 ${{ secrets.DEPLOY_USER }}@${{ secrets.DEPLOY_HOST }} bash -s <<'DEPLOY'
+          set -euo pipefail
+          cd ~/apps/finance-planner
+          git fetch origin main
+          git reset --hard origin/main
+          docker compose up -d --build
+          docker image prune -f
+          # wait for health
+          for i in $(seq 1 20); do
+            status=$(docker inspect --format '{{.State.Health.Status}}' finance-planner 2>/dev/null || echo starting)
+            [ "$status" = "healthy" ] && echo "healthy" && exit 0
+            sleep 3
+          done
+          echo "Container failed to become healthy" >&2
+          docker logs --tail 50 finance-planner >&2
+          exit 1
+          DEPLOY

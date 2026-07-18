@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Planning - Harmonize Finance</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700;800&amp;family=JetBrains+Mono:wght@500&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@100..900&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "tertiary-fixed-dim": "#ffb95f",
+                      "outline": "#75777f",
+                      "error": "#ba1a1a",
+                      "on-error-container": "#93000a",
+                      "inverse-primary": "#b7c6f1",
+                      "inverse-on-surface": "#eaf1ff",
+                      "surface-container-lowest": "#ffffff",
+                      "primary-fixed": "#d9e2ff",
+                      "primary-fixed-dim": "#b7c6f1",
+                      "on-surface": "#0b1c30",
+                      "on-background": "#0b1c30",
+                      "on-surface-variant": "#45464e",
+                      "surface-container": "#e5eeff",
+                      "on-secondary": "#ffffff",
+                      "on-primary-container": "#7584ac",
+                      "tertiary-fixed": "#ffddb8",
+                      "on-primary-fixed-variant": "#37466a",
+                      "caution-light": "#FFFBEB",
+                      "surface-variant": "#d3e4fe",
+                      "on-secondary-fixed": "#002113",
+                      "secondary": "#006c49",
+                      "on-primary-fixed": "#091a3c",
+                      "tertiary-container": "#2c1800",
+                      "slate-surface": "#F8FAFC",
+                      "on-tertiary-fixed-variant": "#653e00",
+                      "on-error": "#ffffff",
+                      "glass-border": "rgba(255, 255, 255, 0.4)",
+                      "on-tertiary-container": "#b97600",
+                      "primary-container": "#0a1b3d",
+                      "surface-container-high": "#dce9ff",
+                      "surface-container-low": "#eff4ff",
+                      "surface-tint": "#4f5e83",
+                      "surface-bright": "#f8f9ff",
+                      "surface-container-highest": "#d3e4fe",
+                      "surface": "#f8f9ff",
+                      "on-secondary-fixed-variant": "#005236",
+                      "secondary-fixed-dim": "#4edea3",
+                      "on-primary": "#ffffff",
+                      "growth-light": "#ECFDF5",
+                      "secondary-fixed": "#6ffbbe",
+                      "background": "#f8f9ff",
+                      "navy-deep": "#060D1F",
+                      "primary": "#000109",
+                      "on-tertiary": "#ffffff",
+                      "inverse-surface": "#213145",
+                      "error-container": "#ffdad6",
+                      "secondary-container": "#6cf8bb",
+                      "tertiary": "#040100",
+                      "surface-dim": "#cbdbf5",
+                      "on-tertiary-fixed": "#2a1700",
+                      "on-secondary-container": "#00714d",
+                      "outline-variant": "#c5c6cf"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "container-margin": "20px",
+                      "xl": "32px",
+                      "lg": "24px",
+                      "md": "16px",
+                      "base": "4px",
+                      "xs": "8px",
+                      "sm": "12px",
+                      "gutter": "12px"
+              },
+              "fontFamily": {
+                      "display-lg": ["Hanken Grotesk"],
+                      "body-sm": ["Hanken Grotesk"],
+                      "body-lg": ["Hanken Grotesk"],
+                      "label-caps": ["Hanken Grotesk"],
+                      "headline-md": ["Hanken Grotesk"],
+                      "data-mono": ["JetBrains Mono"]
+              },
+              "fontSize": {
+                      "display-lg": ["34px", {"lineHeight": "41px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                      "body-sm": ["15px", {"lineHeight": "20px", "fontWeight": "400"}],
+                      "body-lg": ["17px", {"lineHeight": "22px", "fontWeight": "400"}],
+                      "label-caps": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                      "headline-md": ["22px", {"lineHeight": "28px", "fontWeight": "600"}],
+                      "data-mono": ["14px", {"lineHeight": "16px", "letterSpacing": "-0.01em", "fontWeight": "500"}]
+              }
+            },
+          },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+        .dashed-border {
+            background-image: url("data:image/svg+xml,%3csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3e%3crect width='100%25' height='100%25' fill='none' rx='12' ry='12' stroke='%23C5C6CFFF' stroke-width='2' stroke-dasharray='8%2c 8' stroke-dashoffset='0' stroke-linecap='square'/%3e%3c/svg%3e");
+            border-radius: 12px;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-slate-surface text-on-surface font-body-lg min-h-screen pb-24">
+<!-- Top App Bar -->
+<header class="bg-surface dark:bg-navy-deep w-full top-0 sticky border-b border-outline-variant dark:border-outline z-50">
+<div class="flex items-center justify-between px-container-margin py-xs w-full max-w-7xl mx-auto">
+<div class="flex items-center gap-sm">
+<div class="w-10 h-10 rounded-full bg-primary-container flex items-center justify-center overflow-hidden">
+<img alt="User Profile" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBLwhzjT3wNCbuslWphDta2Xc0dD2MgEQWI7cdihaTBIzfzBg-1-vB3y4CTByf2p6GLeiodCBZEczbSGcHTxzqJXcPTv725Eiv-A3RzTzEuIlBCIZlRhFs4sq8dFGBn6WTSGb4EFE0ZJ0qsedhy0WoJRSlQLSpdQilT0p8nSxf9G6vDonJKnDjPOjhHbrFaTPlPQGxSc0ycSvElAk8KDYkf4T3zWXIL7MyWm5pUtqEaFiniOm3dapWx74BoQb5FFbpDLny6qWj8Js2j"/>
+</div>
+<h1 class="font-display-lg text-display-lg font-bold text-primary dark:text-primary-fixed">Personal Finance</h1>
+</div>
+<div class="flex items-center gap-md">
+<button class="material-symbols-outlined text-primary dark:text-primary-fixed-dim hover:bg-surface-container-low dark:hover:bg-surface-container-highest transition-colors p-2 rounded-full active:opacity-70">notifications</button>
+</div>
+</div>
+</header>
+<main class="max-w-7xl mx-auto px-container-margin py-lg space-y-xl">
+<!-- Header & Control Section -->
+<section class="flex flex-col md:flex-row justify-between items-end md:items-center gap-md">
+<div>
+<p class="font-label-caps text-label-caps text-outline uppercase tracking-widest mb-base">Monthly Sit-Down</p>
+<h2 class="font-display-lg text-display-lg text-primary">Planning October</h2>
+</div>
+<div class="flex bg-surface-container-low p-1 rounded-xl">
+<button class="px-md py-xs bg-white shadow-sm rounded-lg font-label-caps text-label-caps text-primary">Household</button>
+<button class="px-md py-xs rounded-lg font-label-caps text-label-caps text-outline hover:text-primary transition-colors">Solo</button>
+</div>
+</section>
+<!-- Main Bento Grid -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-lg">
+<!-- Left Column: Allocations & Gauge (8 cols) -->
+<div class="md:col-span-8 space-y-lg">
+<!-- Impact Gauge / Summary Card -->
+<div class="bg-white p-lg rounded-xl shadow-[0px_4px_12px_rgba(6,13,31,0.02)] border border-[#E2E8F0]">
+<div class="flex justify-between items-start mb-md">
+<div>
+<h3 class="font-headline-md text-headline-md text-primary">Remaining to Allocate</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">€ 1,240.00 of € 5,500.00 total income</p>
+</div>
+<span class="font-data-mono text-data-mono text-secondary bg-secondary-container/20 px-sm py-xs rounded-lg">22.5% Left</span>
+</div>
+<!-- The Impact Gauge Component -->
+<div class="h-6 w-full bg-surface-container rounded-full overflow-hidden flex mb-sm">
+<div class="h-full bg-primary" style="width: 50%" title="Needs"></div>
+<div class="h-full bg-secondary" style="width: 20%" title="Wants"></div>
+<div class="h-full bg-tertiary-fixed-dim" style="width: 7.5%" title="Savings"></div>
+<div class="h-full bg-caution-light border-l border-outline-variant relative overflow-hidden" style="width: 2.5%">
+<div class="absolute inset-0 bg-[repeating-linear-gradient(45deg,transparent,transparent_5px,rgba(0,0,0,0.05)_5px,rgba(0,0,0,0.05)_10px)]"></div>
+</div>
+</div>
+<div class="flex flex-wrap gap-md">
+<div class="flex items-center gap-xs">
+<span class="w-3 h-3 rounded-full bg-primary"></span>
+<span class="font-label-caps text-label-caps text-on-surface-variant">Needs (50%)</span>
+</div>
+<div class="flex items-center gap-xs">
+<span class="w-3 h-3 rounded-full bg-secondary"></span>
+<span class="font-label-caps text-label-caps text-on-surface-variant">Wants (20%)</span>
+</div>
+<div class="flex items-center gap-xs">
+<span class="w-3 h-3 rounded-full bg-tertiary-fixed-dim"></span>
+<span class="font-label-caps text-label-caps text-on-surface-variant">Savings (7.5%)</span>
+</div>
+<div class="flex items-center gap-xs">
+<span class="w-3 h-3 rounded-full bg-caution-light border border-outline-variant"></span>
+<span class="font-label-caps text-label-caps text-on-surface-variant">Tentative (2.5%)</span>
+</div>
+</div>
+</div>
+<!-- Bucket Cards Grid -->
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-md">
+<!-- Bucket Card: Needs -->
+<div class="bg-white p-md rounded-xl shadow-[0px_4px_12px_rgba(6,13,31,0.02)] border border-[#E2E8F0] flex flex-col justify-between h-48 group hover:shadow-md transition-shadow">
+<div class="flex justify-between items-start">
+<div class="p-xs bg-surface-container-low rounded-lg text-primary">
+<span class="material-symbols-outlined">home</span>
+</div>
+<button class="text-outline hover:text-primary transition-colors">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</div>
+<div>
+<h4 class="font-headline-md text-headline-md">Fixed Needs</h4>
+<div class="flex items-baseline gap-xs">
+<span class="font-display-lg text-display-lg text-primary">€ 2,750</span>
+<span class="font-body-sm text-body-sm text-outline">/ mo</span>
+</div>
+</div>
+<div class="w-full bg-surface-container h-1.5 rounded-full overflow-hidden">
+<div class="bg-primary h-full w-full"></div>
+</div>
+</div>
+<!-- Bucket Card: Wants -->
+<div class="bg-white p-md rounded-xl shadow-[0px_4px_12px_rgba(6,13,31,0.02)] border border-[#E2E8F0] flex flex-col justify-between h-48 group hover:shadow-md transition-shadow">
+<div class="flex justify-between items-start">
+<div class="p-xs bg-secondary-container/20 rounded-lg text-secondary">
+<span class="material-symbols-outlined">shopping_bag</span>
+</div>
+<button class="text-outline hover:text-primary transition-colors">
+<span class="material-symbols-outlined">edit</span>
+</button>
+</div>
+<div>
+<h4 class="font-headline-md text-headline-md">Lifestyle</h4>
+<div class="flex items-baseline gap-xs">
+<span class="font-display-lg text-display-lg text-primary">€ 1,100</span>
+<span class="font-body-sm text-body-sm text-outline">/ mo</span>
+</div>
+</div>
+<div class="w-full bg-surface-container h-1.5 rounded-full overflow-hidden">
+<div class="bg-secondary h-full" style="width: 80%"></div>
+</div>
+</div>
+</div>
+<!-- Active Instalments Section -->
+<div>
+<div class="flex items-center justify-between mb-md">
+<h3 class="font-headline-md text-headline-md">Active Instalments</h3>
+<span class="font-label-caps text-label-caps bg-surface-container px-sm py-1 rounded-full text-on-surface-variant">3 Payments this month</span>
+</div>
+<div class="space-y-sm">
+<!-- Instalment Item 1 -->
+<div class="bg-white p-md rounded-xl border border-[#E2E8F0] flex items-center justify-between">
+<div class="flex items-center gap-md">
+<div class="w-10 h-10 rounded-lg bg-surface-container-low flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">flight</span>
+</div>
+<div>
+<p class="font-body-lg font-semibold">Tokyo Flights (Split 4)</p>
+<div class="flex gap-1 mt-1">
+<span class="w-2 h-2 rounded-full bg-primary"></span>
+<span class="w-2 h-2 rounded-full bg-primary"></span>
+<span class="w-2 h-2 rounded-full bg-primary"></span>
+<span class="w-2 h-2 rounded-full bg-outline-variant"></span>
+</div>
+</div>
+</div>
+<div class="text-right">
+<p class="font-data-mono text-data-mono text-primary">€ 340.00</p>
+<p class="font-label-caps text-label-caps text-outline">Due Oct 14</p>
+</div>
+</div>
+<!-- Instalment Item 2 -->
+<div class="bg-white p-md rounded-xl border border-[#E2E8F0] flex items-center justify-between">
+<div class="flex items-center gap-md">
+<div class="w-10 h-10 rounded-lg bg-surface-container-low flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">eyeglasses</span>
+</div>
+<div>
+<p class="font-body-lg font-semibold">Optical Care</p>
+<div class="flex gap-1 mt-1">
+<span class="w-2 h-2 rounded-full bg-primary"></span>
+<span class="w-2 h-2 rounded-full bg-outline-variant"></span>
+<span class="w-2 h-2 rounded-full bg-outline-variant"></span>
+</div>
+</div>
+</div>
+<div class="text-right">
+<p class="font-data-mono text-data-mono text-primary">€ 115.00</p>
+<p class="font-label-caps text-label-caps text-outline">Due Oct 22</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Column: Tentative & Actions (4 cols) -->
+<div class="md:col-span-4 space-y-lg">
+<!-- Tentative Expenses Card -->
+<div class="dashed-border p-lg space-y-md">
+<div class="flex items-center justify-between">
+<h3 class="font-headline-md text-headline-md flex items-center gap-xs">
+                            Tentative
+                            <span class="material-symbols-outlined text-tertiary-fixed-dim" style="font-variation-settings: 'FILL' 1;">error</span>
+</h3>
+<button class="text-secondary font-label-caps text-label-caps hover:underline transition-all">Review All</button>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">These expenses are anticipated but not yet committed to this month's plan.</p>
+<div class="space-y-sm">
+<!-- Tentative Item -->
+<div class="bg-white/50 p-sm rounded-lg border border-outline-variant/30 flex justify-between items-center group cursor-pointer hover:bg-white transition-colors">
+<div class="flex items-center gap-sm">
+<input class="rounded border-outline text-primary focus:ring-primary" type="checkbox"/>
+<span class="font-body-sm">Anniversary Dinner</span>
+</div>
+<span class="font-data-mono text-data-mono">€ 120.00</span>
+</div>
+<div class="bg-white/50 p-sm rounded-lg border border-outline-variant/30 flex justify-between items-center group cursor-pointer hover:bg-white transition-colors">
+<div class="flex items-center gap-sm">
+<input class="rounded border-outline text-primary focus:ring-primary" type="checkbox"/>
+<span class="font-body-sm">Concert Tickets</span>
+</div>
+<span class="font-data-mono text-data-mono">€ 85.00</span>
+</div>
+</div>
+<button class="w-full py-sm border-2 border-dashed border-outline-variant rounded-xl text-outline font-label-caps text-label-caps flex items-center justify-center gap-xs hover:bg-surface-container-low transition-colors">
+<span class="material-symbols-outlined">add</span> Add Suggestion
+                    </button>
+</div>
+<!-- Visual Cue Card -->
+<div class="bg-primary-container text-white p-lg rounded-xl relative overflow-hidden">
+<div class="relative z-10">
+<h4 class="font-headline-md text-headline-md mb-xs">Advisor Insight</h4>
+<p class="font-body-sm opacity-80 mb-md">Allocating your remaining € 1,240 to 'Emergency Fund' would put you 3 months ahead of your 2024 goal.</p>
+<button class="bg-white text-primary px-lg py-sm rounded-full font-label-caps text-label-caps font-bold hover:scale-105 transition-transform active:scale-95">Apply Strategy</button>
+</div>
+<!-- Abstract Background Graphic -->
+<div class="absolute -right-12 -bottom-12 w-48 h-48 bg-on-primary-container/20 rounded-full blur-3xl"></div>
+</div>
+<!-- Final Action -->
+<button class="w-full py-lg bg-primary text-white rounded-xl font-headline-md text-headline-md hover:opacity-90 transition-opacity flex items-center justify-center gap-md active:scale-[0.98] duration-150">
+                    Confirm October Plan
+                    <span class="material-symbols-outlined">check_circle</span>
+</button>
+</div>
+</div>
+<!-- Inspiration Section -->
+<section class="mt-xl grid grid-cols-1 md:grid-cols-2 gap-lg">
+<div class="h-64 rounded-2xl overflow-hidden relative group">
+<img alt="Financial Planning" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="A serene, minimalist home office desk featuring a high-end laptop, a clean ledger, and a small green plant. The scene is bathed in soft, natural morning light, creating a calm and professional atmosphere. The color palette is dominated by soft grays, whites, and deep navy accents, perfectly aligning with the modern corporate financial aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA43vnmht2r3v2Yn4o5O691ziHngOMwiAp6Xrsq-C5WarvAkynBs4vA-Id-8oYp7O8Ng1UZ_MxqT0rNg3R0HvGV8_nsiZiQfjRyH54EG9_Ihdinqkk8ZfLINFrkvcvEorpkvCIjIYUHDKn1lSNozEROfTPR8ZDOXQc6XKn0x_VecESJIEm3JRQ3bdINQDqe7C9o8ywlsbYXS6cNMLcnjdXMdHtx662tiel7kZd4wohKajthz1nFB26GWXfNpwpZPO4sxUeITilQ4uRU"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-end p-lg">
+<p class="text-white font-headline-md text-headline-md">Your 2024 Trajectory</p>
+</div>
+</div>
+<div class="h-64 rounded-2xl overflow-hidden relative group">
+<img alt="Insights" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="A macro shot of a sleek, glass data visualization board with illuminated nodes and connections. The lighting is low-key with sharp highlights on the edges of the glass, suggesting high precision and technological depth. The style is ultra-modern and sophisticated, using a dark navy background with emerald and amber light accents." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAicWQ9z-rggyGjacneoZsDTZTOeJZ_8ltVdGIuyJimWFaDdsRgMUjVxzAqDidqWf5qQ4e3zORQf28RAV3OJM6-sRWQqU8Qyj9Fvp-7Xbav-Zo_Pt1TaxKRbc5WrbM0jNs3dMK0NgrOMUyKROxYwnvvg3iXgQ4LNktuE2_DfSgsKWhL0av4o4RXApJyzBeokt4lVPjvJmOY-0xD1H-xkj1ir8uoZYJT3r5yLeLXCtiKKubBjFYBQGqmFQVClXtgfIE0f99GPWQDqnXc"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-end p-lg">
+<p class="text-white font-headline-md text-headline-md">Impact of Current Allocations</p>
+</div>
+</div>
+</section>
+</main>
+<!-- Bottom Navigation Bar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 py-2 bg-surface dark:bg-navy-deep shadow-lg md:hidden">
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant px-3 py-1 hover:text-secondary transition-colors active:scale-95 duration-150 ease-in-out" href="#">
+<span class="material-symbols-outlined">home</span>
+<span class="font-label-caps text-label-caps">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center text-secondary dark:text-secondary-fixed font-bold bg-secondary-container/20 dark:bg-secondary-container/10 rounded-xl px-3 py-1 active:scale-95 duration-150 ease-in-out" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">calendar_month</span>
+<span class="font-label-caps text-label-caps">Planning</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant px-3 py-1 hover:text-secondary transition-colors active:scale-95 duration-150 ease-in-out" href="#">
+<span class="material-symbols-outlined">analytics</span>
+<span class="font-label-caps text-label-caps">Review</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant px-3 py-1 hover:text-secondary transition-colors active:scale-95 duration-150 ease-in-out" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-label-caps text-label-caps">Settings</span>
+</a>
+</nav>
+<!-- FAB for Task-Focused Intent -->
+<button class="fixed right-6 bottom-24 md:bottom-12 w-14 h-14 bg-secondary text-white rounded-2xl shadow-xl flex items-center justify-center hover:scale-110 active:scale-95 transition-all z-40">
+<span class="material-symbols-outlined" style="font-size: 32px;">add</span>
+</button>
+<script>
+        // Micro-interaction for Tentative Items
+        document.querySelectorAll('.dashed-border input[type="checkbox"]').forEach(checkbox => {
+            checkbox.addEventListener('change', function() {
+                const parent = this.closest('.bg-white\\/50');
+                if(this.checked) {
+                    parent.classList.remove('bg-white/50');
+                    parent.classList.add('bg-growth-light', 'border-secondary');
+                } else {
+                    parent.classList.add('bg-white/50');
+                    parent.classList.remove('bg-growth-light', 'border-secondary');
+                }
+            });
+        });
+
+        // Sticky Header scroll effect
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('header');
+            if (window.scrollY > 10) {
+                header.classList.add('shadow-md');
+            } else {
+                header.classList.remove('shadow-md');
+            }
+        });
+    </script>
+</body></html>

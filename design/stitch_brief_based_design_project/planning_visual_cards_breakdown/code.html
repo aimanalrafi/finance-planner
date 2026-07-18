@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700;800&amp;family=JetBrains+Mono:wght@500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-surface": "#0b1c30",
+                        "on-primary-fixed-variant": "#37466a",
+                        "inverse-surface": "#213145",
+                        "on-secondary-fixed-variant": "#005236",
+                        "tertiary": "#040100",
+                        "caution-light": "#FFFBEB",
+                        "error": "#ba1a1a",
+                        "background": "#f8f9ff",
+                        "surface-container-highest": "#d3e4fe",
+                        "surface": "#f8f9ff",
+                        "primary-fixed-dim": "#b7c6f1",
+                        "primary-container": "#0a1b3d",
+                        "inverse-on-surface": "#eaf1ff",
+                        "tertiary-container": "#2c1800",
+                        "surface-container": "#e5eeff",
+                        "on-primary": "#ffffff",
+                        "tertiary-fixed-dim": "#ffb95f",
+                        "secondary-fixed-dim": "#4edea3",
+                        "on-primary-fixed": "#091a3c",
+                        "surface-tint": "#4f5e83",
+                        "inverse-primary": "#b7c6f1",
+                        "on-tertiary-fixed-variant": "#653e00",
+                        "outline-variant": "#c5c6cf",
+                        "surface-container-lowest": "#ffffff",
+                        "secondary-fixed": "#6ffbbe",
+                        "on-surface-variant": "#45464e",
+                        "on-secondary": "#ffffff",
+                        "on-tertiary-fixed": "#2a1700",
+                        "surface-bright": "#f8f9ff",
+                        "error-container": "#ffdad6",
+                        "secondary-container": "#6cf8bb",
+                        "outline": "#75777f",
+                        "on-tertiary-container": "#b97600",
+                        "surface-dim": "#cbdbf5",
+                        "on-primary-container": "#7584ac",
+                        "on-secondary-fixed": "#002113",
+                        "on-background": "#0b1c30",
+                        "slate-surface": "#F8FAFC",
+                        "surface-container-high": "#dce9ff",
+                        "on-tertiary": "#ffffff",
+                        "on-secondary-container": "#00714d",
+                        "tertiary-fixed": "#ffddb8",
+                        "on-error": "#ffffff",
+                        "surface-container-low": "#eff4ff",
+                        "primary": "#000109",
+                        "navy-deep": "#060D1F",
+                        "surface-variant": "#d3e4fe",
+                        "on-error-container": "#93000a",
+                        "growth-light": "#ECFDF5",
+                        "secondary": "#006c49",
+                        "glass-border": "rgba(255, 255, 255, 0.4)",
+                        "primary-fixed": "#d9e2ff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "xs": "8px",
+                        "sm": "12px",
+                        "lg": "24px",
+                        "gutter": "12px",
+                        "md": "16px",
+                        "xl": "32px",
+                        "container-margin": "20px",
+                        "base": "4px"
+                    },
+                    "fontFamily": {
+                        "display-lg": ["Hanken Grotesk"],
+                        "headline-md": ["Hanken Grotesk"],
+                        "data-mono": ["JetBrains Mono"],
+                        "body-lg": ["Hanken Grotesk"],
+                        "label-caps": ["Hanken Grotesk"],
+                        "body-sm": ["Hanken Grotesk"]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .glass-card {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(226, 232, 240, 0.6);
+        }
+        .donut-ring {
+            transition: stroke-dashoffset 0.6s ease-in-out;
+        }
+        .expand-content {
+            display: grid;
+            grid-template-rows: 0fr;
+            transition: grid-template-rows 0.3s ease-out, opacity 0.2s ease;
+            opacity: 0;
+        }
+        .expanded .expand-content {
+            grid-template-rows: 1fr;
+            opacity: 1;
+            margin-top: 16px;
+        }
+        .chevron-icon {
+            transition: transform 0.3s ease;
+        }
+        .expanded .chevron-icon {
+            transform: rotate(180deg);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-slate-surface text-on-surface font-body-lg min-h-screen pb-24">
+<!-- TopAppBar -->
+<header class="w-full top-0 sticky z-40 bg-surface border-b border-outline-variant">
+<div class="flex items-center justify-between px-container-margin py-xs w-full max-w-7xl mx-auto">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full overflow-hidden bg-surface-container">
+<img alt="User" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDa8Lfab8_TEn--JEfkvNge2XmckT4i6v9K35JP2N8Tq089oz9pj3325M_1twt03aeR2N9zeA1iulbdj5HxIJRFiDWUNfYNWZn4dNrbFTj6okx5pX1Ut0eXTzNu724NZpwUNq9cniXVX778Ea19YoQTxZSGl6EKZooBYx4Ixz6js7jKP1Nx2wDJHAPUTmaIUmlcxz0DIjEJIphDgl_29B9ARTE-typv_Wk0OWSwSr7PXoyehdprwA3kLJnSuzRSGeohlbgeWIWRYYQU"/>
+</div>
+<h1 class="font-display-lg text-[24px] font-bold text-primary">Personal Finance</h1>
+</div>
+<button class="material-symbols-outlined text-primary hover:bg-surface-container-low transition-colors p-2 rounded-full">
+                notifications
+            </button>
+</div>
+</header>
+<main class="px-container-margin py-lg max-w-lg mx-auto space-y-lg">
+<!-- Screen Title Section -->
+<div class="space-y-xs">
+<h2 class="font-headline-md text-headline-md text-on-surface">Monthly Planning</h2>
+<p class="font-body-sm text-on-surface-variant">Allocate your €4,200.00 income into balanced buckets.</p>
+</div>
+<!-- Segmented Control -->
+<div class="flex bg-surface-container-low p-1 rounded-xl">
+<button class="flex-1 py-2 text-center font-label-caps text-label-caps bg-surface text-primary rounded-lg shadow-sm">Solo View</button>
+<button class="flex-1 py-2 text-center font-label-caps text-label-caps text-on-surface-variant hover:text-primary transition-colors">Household</button>
+</div>
+<!-- Bucket Cards Container -->
+<div class="space-y-md">
+<!-- Needs Bucket -->
+<div class="bucket-card glass-card rounded-xl p-md shadow-sm active:scale-[0.98] transition-all cursor-pointer overflow-hidden" onclick="this.classList.toggle('expanded')">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-4">
+<!-- Donut Icon -->
+<div class="relative w-12 h-12">
+<svg class="w-full h-full transform -rotate-90">
+<circle class="text-surface-container-highest" cx="24" cy="24" fill="transparent" r="20" stroke="currentColor" stroke-width="4"></circle>
+<circle class="text-secondary donut-ring" cx="24" cy="24" fill="transparent" r="20" stroke="currentColor" stroke-dasharray="125.6" stroke-dashoffset="62.8" stroke-width="4"></circle>
+</svg>
+<div class="absolute inset-0 flex items-center justify-center font-data-mono text-[10px] font-bold">50%</div>
+</div>
+<div>
+<p class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider">Needs</p>
+<h3 class="font-headline-md text-headline-md text-primary">€2,100.00</h3>
+</div>
+</div>
+<span class="material-symbols-outlined text-outline chevron-icon">expand_more</span>
+</div>
+<div class="expand-content">
+<div class="overflow-hidden space-y-md pt-4 border-t border-outline-variant/30">
+<!-- Sub-category -->
+<div class="space-y-xs">
+<div class="flex justify-between font-body-sm">
+<span class="text-on-surface">Rent &amp; Utilities</span>
+<span class="font-data-mono font-bold">€1,450.00</span>
+</div>
+<div class="h-2 w-full bg-surface-container rounded-full overflow-hidden">
+<div class="h-full bg-secondary w-[69%] rounded-full"></div>
+</div>
+<p class="text-[11px] text-on-surface-variant font-medium">69% of bucket</p>
+</div>
+<!-- Sub-category -->
+<div class="space-y-xs">
+<div class="flex justify-between font-body-sm">
+<span class="text-on-surface">Groceries</span>
+<span class="font-data-mono font-bold">€450.00</span>
+</div>
+<div class="h-2 w-full bg-surface-container rounded-full overflow-hidden">
+<div class="h-full bg-secondary w-[21%] rounded-full"></div>
+</div>
+<p class="text-[11px] text-on-surface-variant font-medium">21% of bucket</p>
+</div>
+<!-- Sub-category -->
+<div class="space-y-xs">
+<div class="flex justify-between font-body-sm">
+<span class="text-on-surface">Transport</span>
+<span class="font-data-mono font-bold">€200.00</span>
+</div>
+<div class="h-2 w-full bg-surface-container rounded-full overflow-hidden">
+<div class="h-full bg-secondary w-[10%] rounded-full"></div>
+</div>
+<p class="text-[11px] text-on-surface-variant font-medium">10% of bucket</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Wants Bucket -->
+<div class="bucket-card glass-card rounded-xl p-md shadow-sm active:scale-[0.98] transition-all cursor-pointer overflow-hidden" onclick="this.classList.toggle('expanded')">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-4">
+<div class="relative w-12 h-12">
+<svg class="w-full h-full transform -rotate-90">
+<circle class="text-surface-container-highest" cx="24" cy="24" fill="transparent" r="20" stroke="currentColor" stroke-width="4"></circle>
+<circle class="text-tertiary-fixed-dim donut-ring" cx="24" cy="24" fill="transparent" r="20" stroke="currentColor" stroke-dasharray="125.6" stroke-dashoffset="87.9" stroke-width="4"></circle>
+</svg>
+<div class="absolute inset-0 flex items-center justify-center font-data-mono text-[10px] font-bold">30%</div>
+</div>
+<div>
+<p class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider">Wants</p>
+<h3 class="font-headline-md text-headline-md text-primary">€1,260.00</h3>
+</div>
+</div>
+<span class="material-symbols-outlined text-outline chevron-icon">expand_more</span>
+</div>
+<div class="expand-content">
+<div class="overflow-hidden space-y-md pt-4 border-t border-outline-variant/30">
+<div class="space-y-xs">
+<div class="flex justify-between font-body-sm">
+<span class="text-on-surface">Dining Out</span>
+<span class="font-data-mono font-bold">€600.00</span>
+</div>
+<div class="h-2 w-full bg-surface-container rounded-full overflow-hidden">
+<div class="h-full bg-tertiary-fixed-dim w-[48%] rounded-full"></div>
+</div>
+<p class="text-[11px] text-on-surface-variant font-medium">48% of bucket</p>
+</div>
+<div class="space-y-xs">
+<div class="flex justify-between font-body-sm">
+<span class="text-on-surface">Entertainment</span>
+<span class="font-data-mono font-bold">€400.00</span>
+</div>
+<div class="h-2 w-full bg-surface-container rounded-full overflow-hidden">
+<div class="h-full bg-tertiary-fixed-dim w-[32%] rounded-full"></div>
+</div>
+<p class="text-[11px] text-on-surface-variant font-medium">32% of bucket</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Savings Bucket -->
+<div class="bucket-card glass-card rounded-xl p-md shadow-sm active:scale-[0.98] transition-all cursor-pointer overflow-hidden" onclick="this.classList.toggle('expanded')">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-4">
+<div class="relative w-12 h-12">
+<svg class="w-full h-full transform -rotate-90">
+<circle class="text-surface-container-highest" cx="24" cy="24" fill="transparent" r="20" stroke="currentColor" stroke-width="4"></circle>
+<circle class="text-secondary-fixed-dim donut-ring" cx="24" cy="24" fill="transparent" r="20" stroke="currentColor" stroke-dasharray="125.6" stroke-dashoffset="100.5" stroke-width="4"></circle>
+</svg>
+<div class="absolute inset-0 flex items-center justify-center font-data-mono text-[10px] font-bold">20%</div>
+</div>
+<div>
+<p class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider">Savings</p>
+<h3 class="font-headline-md text-headline-md text-primary">€840.00</h3>
+</div>
+</div>
+<span class="material-symbols-outlined text-outline chevron-icon">expand_more</span>
+</div>
+<div class="expand-content">
+<div class="overflow-hidden space-y-md pt-4 border-t border-outline-variant/30">
+<div class="space-y-xs">
+<div class="flex justify-between font-body-sm">
+<span class="text-on-surface">Emergency Fund</span>
+<span class="font-data-mono font-bold">€500.00</span>
+</div>
+<div class="h-2 w-full bg-surface-container rounded-full overflow-hidden">
+<div class="h-full bg-secondary-fixed-dim w-[60%] rounded-full"></div>
+</div>
+<p class="text-[11px] text-on-surface-variant font-medium">60% of bucket</p>
+</div>
+<div class="space-y-xs">
+<div class="flex justify-between font-body-sm">
+<span class="text-on-surface">ETF Investing</span>
+<span class="font-data-mono font-bold">€340.00</span>
+</div>
+<div class="h-2 w-full bg-surface-container rounded-full overflow-hidden">
+<div class="h-full bg-secondary-fixed-dim w-[40%] rounded-full"></div>
+</div>
+<p class="text-[11px] text-on-surface-variant font-medium">40% of bucket</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Summary / Action -->
+<div class="glass-card rounded-2xl p-lg border-2 border-dashed border-outline-variant text-center space-y-md">
+<div class="space-y-xs">
+<p class="font-label-caps text-label-caps text-on-surface-variant uppercase">Unallocated</p>
+<p class="font-display-lg text-display-lg text-primary">€0.00</p>
+</div>
+<button class="w-full py-4 bg-navy-deep text-on-primary font-headline-md rounded-xl active:opacity-70 transition-all shadow-lg">
+                Confirm Plan
+            </button>
+</div>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 py-2 bg-surface shadow-md">
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-3 py-1 hover:text-secondary transition-colors" href="#">
+<span class="material-symbols-outlined">home</span>
+<span class="font-label-caps text-label-caps">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center text-secondary font-bold bg-secondary-container/20 rounded-xl px-3 py-1 transition-all" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">calendar_month</span>
+<span class="font-label-caps text-label-caps">Planning</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-3 py-1 hover:text-secondary transition-colors" href="#">
+<span class="material-symbols-outlined">analytics</span>
+<span class="font-label-caps text-label-caps">Review</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-3 py-1 hover:text-secondary transition-colors" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-label-caps text-label-caps">Settings</span>
+</a>
+</nav>
+<script>
+        // Simple micro-interaction for cards
+        document.querySelectorAll('.bucket-card').forEach(card => {
+            card.addEventListener('click', function() {
+                // Potential for adding more complex animation logic if needed
+            });
+        });
+
+        // Toggle Dark Mode (Optional utility for testing theme)
+        function toggleDarkMode() {
+            document.documentElement.classList.toggle('dark');
+        }
+    </script>
+</body></html>

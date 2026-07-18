@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Planning - Personal Finance</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700;800&amp;family=JetBrains+Mono:wght@500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-error-container": "#93000a",
+                        "surface": "#f8f9ff",
+                        "secondary-container": "#6cf8bb",
+                        "primary-fixed": "#d9e2ff",
+                        "tertiary-fixed-dim": "#ffb95f",
+                        "tertiary": "#040100",
+                        "growth-light": "#ECFDF5",
+                        "surface-tint": "#4f5e83",
+                        "background": "#f8f9ff",
+                        "surface-dim": "#cbdbf5",
+                        "surface-container-high": "#dce9ff",
+                        "primary": "#000109",
+                        "on-primary-fixed-variant": "#37466a",
+                        "primary-container": "#0a1b3d",
+                        "secondary-fixed": "#6ffbbe",
+                        "on-surface": "#0b1c30",
+                        "tertiary-container": "#2c1800",
+                        "tertiary-fixed": "#ffddb8",
+                        "on-tertiary": "#ffffff",
+                        "secondary-fixed-dim": "#4edea3",
+                        "outline": "#75777f",
+                        "on-secondary-fixed-variant": "#005236",
+                        "outline-variant": "#c5c6cf",
+                        "on-secondary-fixed": "#002113",
+                        "navy-deep": "#060D1F",
+                        "surface-container-highest": "#d3e4fe",
+                        "surface-container-low": "#eff4ff",
+                        "on-secondary-container": "#00714d",
+                        "slate-surface": "#F8FAFC",
+                        "on-tertiary-container": "#b97600",
+                        "on-error": "#ffffff",
+                        "inverse-on-surface": "#eaf1ff",
+                        "inverse-primary": "#b7c6f1",
+                        "surface-bright": "#f8f9ff",
+                        "on-tertiary-fixed-variant": "#653e00",
+                        "on-primary-container": "#7584ac",
+                        "error": "#ba1a1a",
+                        "surface-container-lowest": "#ffffff",
+                        "error-container": "#ffdad6",
+                        "on-secondary": "#ffffff",
+                        "surface-variant": "#d3e4fe",
+                        "on-surface-variant": "#45464e",
+                        "glass-border": "rgba(255, 255, 255, 0.4)",
+                        "primary-fixed-dim": "#b7c6f1",
+                        "secondary": "#006c49",
+                        "surface-container": "#e5eeff",
+                        "caution-light": "#FFFBEB",
+                        "on-primary": "#ffffff",
+                        "on-tertiary-fixed": "#2a1700",
+                        "on-primary-fixed": "#091a3c",
+                        "inverse-surface": "#213145",
+                        "on-background": "#0b1c30"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "md": "16px",
+                        "xs": "8px",
+                        "sm": "12px",
+                        "container-margin": "20px",
+                        "gutter": "12px",
+                        "base": "4px",
+                        "xl": "32px",
+                        "lg": "24px"
+                    },
+                    "fontFamily": {
+                        "data-mono": ["JetBrains Mono"],
+                        "label-caps": ["Hanken Grotesk"],
+                        "display-lg": ["Hanken Grotesk"],
+                        "body-sm": ["Hanken Grotesk"],
+                        "body-lg": ["Hanken Grotesk"],
+                        "headline-md": ["Hanken Grotesk"]
+                    },
+                    "fontSize": {
+                        "data-mono": ["14px", {"lineHeight": "16px", "letterSpacing": "-0.01em", "fontWeight": "500"}],
+                        "label-caps": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                        "display-lg": ["34px", {"lineHeight": "41px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "body-sm": ["15px", {"lineHeight": "20px", "fontWeight": "400"}],
+                        "body-lg": ["17px", {"lineHeight": "22px", "fontWeight": "400"}],
+                        "headline-md": ["22px", {"lineHeight": "28px", "fontWeight": "600"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .accordion-active .accordion-content {
+            max-height: 800px;
+        }
+        .accordion-active .arrow-icon {
+            transform: rotate(180deg);
+        }
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+        body {
+            min-height: max(884px, 100dvh);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body-lg min-h-screen pb-24">
+<!-- TopAppBar -->
+<header class="w-full top-0 sticky z-50 bg-surface dark:bg-navy-deep border-b border-outline-variant dark:border-outline">
+<div class="flex items-center justify-between px-container-margin py-xs w-full max-w-7xl mx-auto">
+<div class="flex items-center gap-md">
+<div class="w-10 h-10 rounded-full bg-surface-container-highest flex items-center justify-center overflow-hidden border border-outline-variant">
+<img alt="User" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDn9U9Wr0-yHH6Z1pZPBrgVqJsjdRx5IL-2ubnSJZ8pHjsUqoactQNINrtIinP1zJX8CrehRMuhBTC2Y-V_L109XknwZEDDGpFDrCqMEUk0NsGbIGxCmQtcEosM4Yvt7VlHpJeY7EERZfilxXCQ3HOlM4eQuQHytJnH-UcErWHFU5sEcoFy9cSyrkxc7eaKb0L504z55mKHC-1LAZ51ds38HHUPn1dlF9a8rcJiudh2p7gQTquzzYqSxszLLccRcdyCt1fYhSpNZXdS"/>
+</div>
+<h1 class="font-display-lg text-display-lg font-bold text-primary dark:text-primary-fixed">Personal Finance</h1>
+</div>
+<button class="material-symbols-outlined text-primary dark:text-primary-fixed-dim hover:bg-surface-container-low dark:hover:bg-surface-container-highest transition-colors p-2 rounded-full">
+            notifications
+        </button>
+</div>
+</header>
+<main class="max-w-7xl mx-auto px-container-margin mt-lg">
+<!-- Planning Header -->
+<section class="mb-xl">
+<div class="flex justify-between items-end mb-md">
+<div>
+<p class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-widest">October 2023 Plan</p>
+<h2 class="font-headline-md text-headline-md text-primary mt-base">Monthly Budget Allocation</h2>
+</div>
+<div class="text-right">
+<p class="font-label-caps text-label-caps text-on-surface-variant uppercase">Total Income</p>
+<p class="font-data-mono text-headline-md text-secondary">€5,500.00</p>
+</div>
+</div>
+<!-- Segmented Control -->
+<div class="flex bg-surface-container rounded-xl p-1 w-fit mb-lg">
+<button class="px-md py-xs bg-white shadow-sm rounded-lg text-primary font-semibold text-body-sm transition-all">Solo View</button>
+<button class="px-md py-xs text-on-surface-variant font-medium text-body-sm hover:text-primary transition-all">Household</button>
+</div>
+</section>
+<!-- Accordion Section -->
+<div class="space-y-md">
+<!-- Needs Bucket -->
+<div class="bg-white border border-outline-variant rounded-xl overflow-hidden shadow-sm transition-all accordion-item" id="accordion-needs">
+<button class="w-full flex items-center justify-between px-lg py-md hover:bg-slate-surface transition-colors text-left" onclick="toggleAccordion('needs')">
+<div class="flex items-center gap-md">
+<div class="w-1.5 h-10 bg-primary rounded-full"></div>
+<div>
+<h3 class="font-headline-md text-headline-md text-primary">Needs</h3>
+<p class="font-body-sm text-on-surface-variant">Essential living expenses</p>
+</div>
+</div>
+<div class="flex items-center gap-xl">
+<div class="text-right">
+<p class="font-data-mono text-body-lg font-bold">€2,550.00</p>
+<p class="font-label-caps text-label-caps text-on-primary-container">46% of Income</p>
+</div>
+<span class="material-symbols-outlined arrow-icon transition-transform duration-300">expand_more</span>
+</div>
+</button>
+<div class="accordion-content">
+<div class="px-lg pb-lg pt-base space-y-sm border-t border-outline-variant/30">
+<div class="flex justify-between items-center py-sm border-b border-outline-variant/20">
+<span class="text-body-lg font-medium">Rent</span>
+<div class="text-right">
+<span class="font-data-mono text-body-lg">€1,400.00</span>
+<span class="text-body-sm text-on-surface-variant ml-xs">(55% of Needs)</span>
+</div>
+</div>
+<div class="flex justify-between items-center py-sm border-b border-outline-variant/20">
+<span class="text-body-lg font-medium">Groceries</span>
+<div class="text-right">
+<span class="font-data-mono text-body-lg">€600.00</span>
+<span class="text-body-sm text-on-surface-variant ml-xs">(24% of Needs)</span>
+</div>
+</div>
+<div class="flex justify-between items-center py-sm border-b border-outline-variant/20">
+<span class="text-body-lg font-medium">Utilities</span>
+<div class="text-right">
+<span class="font-data-mono text-body-lg">€450.00</span>
+<span class="text-body-sm text-on-surface-variant ml-xs">(18% of Needs)</span>
+</div>
+</div>
+<div class="flex justify-between items-center py-sm">
+<span class="text-body-lg font-medium">Transportation</span>
+<div class="text-right">
+<span class="font-data-mono text-body-lg">€300.00</span>
+<span class="text-body-sm text-on-surface-variant ml-xs">(12% of Needs)</span>
+</div>
+</div>
+<button class="w-full py-sm mt-md border-2 border-dashed border-outline-variant rounded-lg text-on-surface-variant font-medium hover:border-secondary hover:text-secondary transition-all flex items-center justify-center gap-xs">
+<span class="material-symbols-outlined text-[20px]">add_circle</span>
+                        Add Category
+                    </button>
+</div>
+</div>
+</div>
+<!-- Wants Bucket -->
+<div class="bg-white border border-outline-variant rounded-xl overflow-hidden shadow-sm transition-all accordion-item" id="accordion-wants">
+<button class="w-full flex items-center justify-between px-lg py-md hover:bg-slate-surface transition-colors text-left" onclick="toggleAccordion('wants')">
+<div class="flex items-center gap-md">
+<div class="w-1.5 h-10 bg-secondary rounded-full"></div>
+<div>
+<h3 class="font-headline-md text-headline-md text-primary">Wants</h3>
+<p class="font-body-sm text-on-surface-variant">Lifestyle and leisure</p>
+</div>
+</div>
+<div class="flex items-center gap-xl">
+<div class="text-right">
+<p class="font-data-mono text-body-lg font-bold">€1,650.00</p>
+<p class="font-label-caps text-label-caps text-on-secondary-container">30% of Income</p>
+</div>
+<span class="material-symbols-outlined arrow-icon transition-transform duration-300">expand_more</span>
+</div>
+</button>
+<div class="accordion-content">
+<div class="px-lg pb-lg pt-base space-y-sm border-t border-outline-variant/30">
+<div class="flex justify-between items-center py-sm border-b border-outline-variant/20">
+<span class="text-body-lg font-medium">Dining Out</span>
+<div class="text-right">
+<span class="font-data-mono text-body-lg">€500.00</span>
+<span class="text-body-sm text-on-surface-variant ml-xs">(30% of Wants)</span>
+</div>
+</div>
+<div class="flex justify-between items-center py-sm border-b border-outline-variant/20">
+<span class="text-body-lg font-medium">Streaming Services</span>
+<div class="text-right">
+<span class="font-data-mono text-body-lg">€150.00</span>
+<span class="text-body-sm text-on-surface-variant ml-xs">(9% of Wants)</span>
+</div>
+</div>
+<div class="flex justify-between items-center py-sm border-b border-outline-variant/20">
+<span class="text-body-lg font-medium">Shopping</span>
+<div class="text-right">
+<span class="font-data-mono text-body-lg">€700.00</span>
+<span class="text-body-sm text-on-surface-variant ml-xs">(42% of Wants)</span>
+</div>
+</div>
+<div class="flex justify-between items-center py-sm">
+<span class="text-body-lg font-medium">Hobbies</span>
+<div class="text-right">
+<span class="font-data-mono text-body-lg">€300.00</span>
+<span class="text-body-sm text-on-surface-variant ml-xs">(18% of Wants)</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Savings Bucket -->
+<div class="bg-white border border-outline-variant rounded-xl overflow-hidden shadow-sm transition-all accordion-item" id="accordion-savings">
+<button class="w-full flex items-center justify-between px-lg py-md hover:bg-slate-surface transition-colors text-left" onclick="toggleAccordion('savings')">
+<div class="flex items-center gap-md">
+<div class="w-1.5 h-10 bg-tertiary-fixed-dim rounded-full"></div>
+<div>
+<h3 class="font-headline-md text-headline-md text-primary">Savings &amp; Debt</h3>
+<p class="font-body-sm text-on-surface-variant">Future growth and security</p>
+</div>
+</div>
+<div class="flex items-center gap-xl">
+<div class="text-right">
+<p class="font-data-mono text-body-lg font-bold">€1,100.00</p>
+<p class="font-label-caps text-label-caps text-on-tertiary-container">20% of Income</p>
+</div>
+<span class="material-symbols-outlined arrow-icon transition-transform duration-300">expand_more</span>
+</div>
+</button>
+<div class="accordion-content">
+<div class="px-lg pb-lg pt-base space-y-sm border-t border-outline-variant/30">
+<div class="flex justify-between items-center py-sm border-b border-outline-variant/20">
+<span class="text-body-lg font-medium">Emergency Fund</span>
+<div class="text-right">
+<span class="font-data-mono text-body-lg">€500.00</span>
+<span class="text-body-sm text-on-surface-variant ml-xs">(45% of Savings)</span>
+</div>
+</div>
+<div class="flex justify-between items-center py-sm border-b border-outline-variant/20">
+<span class="text-body-lg font-medium">Retirement Fund</span>
+<div class="text-right">
+<span class="font-data-mono text-body-lg">€400.00</span>
+<span class="text-body-sm text-on-surface-variant ml-xs">(36% of Savings)</span>
+</div>
+</div>
+<div class="flex justify-between items-center py-sm">
+<span class="text-body-lg font-medium">Vacation Fund</span>
+<div class="text-right">
+<span class="font-data-mono text-body-lg">€200.00</span>
+<span class="text-body-sm text-on-surface-variant ml-xs">(18% of Savings)</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Active Instalments Section -->
+<section class="mt-xl">
+<h4 class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-widest mb-md">Active Instalments</h4>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-md">
+<!-- Tokyo Flights Card -->
+<div class="bg-white border border-outline-variant rounded-xl p-md shadow-sm">
+<div class="flex justify-between items-start mb-sm">
+<div class="flex items-center gap-sm">
+<div class="w-10 h-10 bg-primary-container rounded-lg flex items-center justify-center">
+<span class="material-symbols-outlined text-primary-fixed-dim">flight_takeoff</span>
+</div>
+<div>
+<p class="font-bold text-primary">Tokyo Flights</p>
+<p class="text-body-sm text-on-surface-variant">Due Oct 14</p>
+</div>
+</div>
+<p class="font-data-mono text-primary">€340.00</p>
+</div>
+<div class="flex items-center justify-between">
+<div class="flex gap-1.5">
+<div class="w-2.5 h-2.5 rounded-full bg-primary"></div>
+<div class="w-2.5 h-2.5 rounded-full bg-primary"></div>
+<div class="w-2.5 h-2.5 rounded-full bg-primary"></div>
+<div class="w-2.5 h-2.5 rounded-full bg-outline-variant"></div>
+</div>
+<span class="text-label-caps font-bold text-on-primary-container bg-primary-fixed px-2 py-0.5 rounded">Split 4</span>
+</div>
+</div>
+<!-- Optical Care Card -->
+<div class="bg-white border border-outline-variant rounded-xl p-md shadow-sm">
+<div class="flex justify-between items-start mb-sm">
+<div class="flex items-center gap-sm">
+<div class="w-10 h-10 bg-secondary-container/20 rounded-lg flex items-center justify-center">
+<span class="material-symbols-outlined text-secondary">eyeglasses</span>
+</div>
+<div>
+<p class="font-bold text-primary">Optical Care</p>
+<p class="text-body-sm text-on-surface-variant">Due Oct 22</p>
+</div>
+</div>
+<p class="font-data-mono text-primary">€115.00</p>
+</div>
+<div class="flex items-center justify-between">
+<div class="flex gap-1.5">
+<div class="w-2.5 h-2.5 rounded-full bg-secondary"></div>
+<div class="w-2.5 h-2.5 rounded-full bg-outline-variant"></div>
+<div class="w-2.5 h-2.5 rounded-full bg-outline-variant"></div>
+</div>
+<span class="text-label-caps font-bold text-on-secondary-container bg-secondary-container px-2 py-0.5 rounded">Split 3</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Tentative Section -->
+<section class="mt-xl p-lg border-2 border-dashed border-outline-variant rounded-2xl bg-surface/50">
+<div class="flex justify-between items-center mb-xs">
+<div class="flex items-center gap-xs">
+<span class="material-symbols-outlined text-on-surface-variant text-[20px]">info</span>
+<h4 class="font-headline-md text-headline-md text-primary">Tentative</h4>
+</div>
+<a class="text-secondary font-semibold text-body-sm hover:underline" href="#">Review All</a>
+</div>
+<p class="text-body-sm text-on-surface-variant mb-lg">These expenses are anticipated but not yet committed to this month's plan.</p>
+<div class="space-y-sm">
+<div class="flex justify-between items-center py-sm border-b border-outline-variant/20">
+<div class="flex items-center gap-md">
+<input class="w-5 h-5 rounded border-outline-variant text-secondary focus:ring-secondary/20" type="checkbox"/>
+<span class="text-body-lg font-medium">Anniversary Dinner</span>
+</div>
+<span class="font-data-mono text-body-lg">€120.00</span>
+</div>
+<div class="flex justify-between items-center py-sm">
+<div class="flex items-center gap-md">
+<input class="w-5 h-5 rounded border-outline-variant text-secondary focus:ring-secondary/20" type="checkbox"/>
+<span class="text-body-lg font-medium">Concert Tickets</span>
+</div>
+<span class="font-data-mono text-body-lg">€85.00</span>
+</div>
+</div>
+</section>
+<!-- Advisor Insight Widget -->
+<div class="mt-xl p-md bg-tertiary-container text-tertiary-fixed rounded-2xl border border-tertiary/20 flex gap-md shadow-sm">
+<span class="material-symbols-outlined text-tertiary-fixed-dim shrink-0" style="font-variation-settings: 'FILL' 1;">lightbulb</span>
+<div class="space-y-1">
+<h5 class="font-bold text-body-sm uppercase tracking-wider text-tertiary-fixed-dim">Advisor Insight</h5>
+<p class="text-body-sm">You have €250 unallocated. Consider boosting your <strong>Emergency Fund</strong> to hit your 20% savings target earlier than planned.</p>
+</div>
+</div>
+<!-- Plan Summary -->
+<section class="mt-xl p-lg bg-surface-container rounded-2xl border border-outline-variant">
+<h4 class="font-headline-md text-headline-md text-primary mb-md">Plan Summary</h4>
+<div class="space-y-md">
+<div class="flex justify-between items-end mb-xs">
+<span class="font-body-sm font-semibold text-on-surface-variant uppercase">Current Allocation</span>
+<span class="font-data-mono text-body-lg text-primary">96% Allocated</span>
+</div>
+<div class="h-4 w-full bg-outline-variant/30 rounded-full flex overflow-hidden">
+<div class="h-full bg-primary" style="width: 46%"></div>
+<div class="h-full bg-secondary" style="width: 30%"></div>
+<div class="h-full bg-tertiary-fixed-dim" style="width: 20%"></div>
+</div>
+<div class="flex gap-md mt-sm">
+<div class="flex items-center gap-xs">
+<div class="w-3 h-3 bg-primary rounded-sm"></div>
+<span class="text-label-caps font-medium text-on-surface-variant">Needs (46%)</span>
+</div>
+<div class="flex items-center gap-xs">
+<div class="w-3 h-3 bg-secondary rounded-sm"></div>
+<span class="text-label-caps font-medium text-on-surface-variant">Wants (30%)</span>
+</div>
+<div class="flex items-center gap-xs">
+<div class="w-3 h-3 bg-tertiary-fixed-dim rounded-sm"></div>
+<span class="text-label-caps font-medium text-on-surface-variant">Savings (20%)</span>
+</div>
+</div>
+</div>
+<button class="w-full bg-primary text-white py-md rounded-xl font-bold mt-xl hover:opacity-90 active:scale-[0.98] transition-all">
+            Confirm October Plan
+        </button>
+</section>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 py-2 bg-surface dark:bg-navy-deep shadow-lg">
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant px-3 py-1 hover:text-secondary transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="home">home</span>
+<span class="font-label-caps text-label-caps mt-1">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center text-secondary dark:text-secondary-fixed font-bold bg-secondary-container/20 dark:bg-secondary-container/10 rounded-xl px-3 py-1" href="#">
+<span class="material-symbols-outlined" data-icon="calendar_month" style="font-variation-settings: 'FILL' 1;">calendar_month</span>
+<span class="font-label-caps text-label-caps mt-1">Planning</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant px-3 py-1 hover:text-secondary transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="analytics">analytics</span>
+<span class="font-label-caps text-label-caps mt-1">Review</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant px-3 py-1 hover:text-secondary transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="font-label-caps text-label-caps mt-1">Settings</span>
+</a>
+</nav>
+<script>
+    function toggleAccordion(id) {
+        const element = document.getElementById('accordion-' + id);
+        const isActive = element.classList.contains('accordion-active');
+        if (isActive) {
+            element.classList.remove('accordion-active');
+        } else {
+            element.classList.add('accordion-active');
+        }
+    }
+    window.onload = () => {
+        setTimeout(() => toggleAccordion('needs'), 300);
+    };
+</script>
+</body></html>

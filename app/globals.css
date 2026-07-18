@@ -1,0 +1,134 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: var(--font-hanken), "Hanken Grotesk", system-ui, sans-serif;
+  --font-mono: var(--font-jetbrains), "JetBrains Mono", monospace;
+
+  /* Fiscal Harmony palette */
+  --color-surface: #f8f9ff;
+  --color-slate-surface: #f8fafc;
+  --color-card: #ffffff;
+  --color-ink: #0b1c30;
+  --color-muted: #45464e;
+  --color-faint: #75777f;
+  --color-line: #e2e8f0;
+
+  --color-navy: #0a1b3d;
+  --color-navy-deep: #060d1f;
+  --color-navy-soft: #37466a;
+
+  --color-emerald: #059669;
+  --color-emerald-deep: #006c49;
+  --color-emerald-bright: #10b981;
+  --color-mint: #ecfdf5;
+  --color-mint-strong: #6cf8bb;
+
+  --color-amber: #d97706;
+  --color-amber-bright: #f59e0b;
+  --color-amber-soft: #ffb95f;
+  --color-cream: #fffbeb;
+
+  --color-chip: #d9e2ff;
+  --color-chip-ink: #37466a;
+  --color-lav: #eff4ff;
+
+  --color-error: #ba1a1a;
+  --color-error-light: #ffdad6;
+
+  --radius-card: 1rem;
+  --radius-field: 0.75rem;
+
+  --shadow-card: 0 2px 4px rgba(10, 27, 61, 0.02), 0 4px 12px rgba(10, 27, 61, 0.04);
+  --shadow-lift: 0 6px 20px rgba(10, 27, 61, 0.1);
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  background: var(--color-surface);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+.material-symbols-outlined {
+  font-family: "Material Symbols Outlined";
+  font-weight: normal;
+  font-style: normal;
+  display: inline-block;
+  line-height: 1;
+  text-transform: none;
+  letter-spacing: normal;
+  word-wrap: normal;
+  white-space: nowrap;
+  direction: ltr;
+  font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24;
+}
+
+.msf {
+  font-variation-settings: "FILL" 1, "wght" 400, "GRAD" 0, "opsz" 24;
+}
+
+.label-caps {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.data-mono {
+  font-family: var(--font-mono);
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  font-variant-numeric: tabular-nums;
+}
+
+.card {
+  background: var(--color-card);
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-card);
+}
+
+.dashed-card {
+  background: var(--color-card);
+  border: 1.5px dashed #c5c6cf;
+  border-radius: var(--radius-card);
+}
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+input[type="number"] {
+  -moz-appearance: textfield;
+  appearance: textfield;
+}
+
+/* modal glass backdrop */
+.glass-backdrop {
+  background: rgba(6, 13, 31, 0.45);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+@keyframes slide-up {
+  from {
+    transform: translateY(24px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+.animate-slide-up {
+  animation: slide-up 0.22s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+::selection {
+  background: var(--color-chip);
+}

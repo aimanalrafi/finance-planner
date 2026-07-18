@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Settings - Harmonize Finance</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            font-family: 'Hanken Grotesk', sans-serif;
+            -webkit-font-smoothing: antialiased;
+        }
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(226, 232, 240, 0.8);
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 10px;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "tertiary-fixed-dim": "#ffb95f",
+                      "outline": "#75777f",
+                      "error": "#ba1a1a",
+                      "on-error-container": "#93000a",
+                      "inverse-primary": "#b7c6f1",
+                      "inverse-on-surface": "#eaf1ff",
+                      "surface-container-lowest": "#ffffff",
+                      "primary-fixed": "#d9e2ff",
+                      "primary-fixed-dim": "#b7c6f1",
+                      "on-surface": "#0b1c30",
+                      "on-background": "#0b1c30",
+                      "on-surface-variant": "#45464e",
+                      "surface-container": "#e5eeff",
+                      "on-secondary": "#ffffff",
+                      "on-primary-container": "#7584ac",
+                      "tertiary-fixed": "#ffddb8",
+                      "on-primary-fixed-variant": "#37466a",
+                      "caution-light": "#FFFBEB",
+                      "surface-variant": "#d3e4fe",
+                      "on-secondary-fixed": "#002113",
+                      "secondary": "#006c49",
+                      "on-primary-fixed": "#091a3c",
+                      "tertiary-container": "#2c1800",
+                      "slate-surface": "#F8FAFC",
+                      "on-tertiary-fixed-variant": "#653e00",
+                      "on-error": "#ffffff",
+                      "glass-border": "rgba(255, 255, 255, 0.4)",
+                      "on-tertiary-container": "#b97600",
+                      "primary-container": "#0a1b3d",
+                      "surface-container-high": "#dce9ff",
+                      "surface-container-low": "#eff4ff",
+                      "surface-tint": "#4f5e83",
+                      "surface-bright": "#f8f9ff",
+                      "surface-container-highest": "#d3e4fe",
+                      "surface": "#f8f9ff",
+                      "on-secondary-fixed-variant": "#005236",
+                      "secondary-fixed-dim": "#4edea3",
+                      "on-primary": "#ffffff",
+                      "growth-light": "#ECFDF5",
+                      "secondary-fixed": "#6ffbbe",
+                      "background": "#f8f9ff",
+                      "navy-deep": "#060D1F",
+                      "primary": "#000109",
+                      "on-tertiary": "#ffffff",
+                      "inverse-surface": "#213145",
+                      "error-container": "#ffdad6",
+                      "secondary-container": "#6cf8bb",
+                      "tertiary": "#040100",
+                      "surface-dim": "#cbdbf5",
+                      "on-tertiary-fixed": "#2a1700",
+                      "on-secondary-container": "#00714d",
+                      "outline-variant": "#c5c6cf"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "container-margin": "20px",
+                      "xl": "32px",
+                      "lg": "24px",
+                      "md": "16px",
+                      "base": "4px",
+                      "xs": "8px",
+                      "sm": "12px",
+                      "gutter": "12px"
+              },
+              "fontFamily": {
+                      "display-lg": ["Hanken Grotesk"],
+                      "body-sm": ["Hanken Grotesk"],
+                      "body-lg": ["Hanken Grotesk"],
+                      "label-caps": ["Hanken Grotesk"],
+                      "headline-md": ["Hanken Grotesk"],
+                      "data-mono": ["JetBrains Mono"]
+              },
+              "fontSize": {
+                      "display-lg": ["34px", {"lineHeight": "41px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                      "body-sm": ["15px", {"lineHeight": "20px", "fontWeight": "400"}],
+                      "body-lg": ["17px", {"lineHeight": "22px", "fontWeight": "400"}],
+                      "label-caps": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                      "headline-md": ["22px", {"lineHeight": "28px", "fontWeight": "600"}],
+                      "data-mono": ["14px", {"lineHeight": "16px", "letterSpacing": "-0.01em", "fontWeight": "500"}]
+              }
+            },
+          },
+        }
+    </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-slate-surface text-on-surface min-h-screen pb-24">
+<!-- TopAppBar -->
+<header class="bg-surface dark:bg-navy-deep w-full top-0 sticky z-50 border-b border-outline-variant dark:border-outline">
+<div class="flex items-center justify-between px-container-margin py-xs w-full max-w-7xl mx-auto">
+<div class="flex items-center gap-sm">
+<div class="w-10 h-10 rounded-full overflow-hidden border border-outline-variant">
+<img alt="User Profile" class="w-full h-full object-cover" data-alt="A professional studio portrait of a woman with a confident, calm expression. The lighting is soft and high-key, creating a bright and modern corporate aesthetic. The background is a minimalist, neutral gray. The overall mood is one of financial stability and trustworthiness, perfectly aligned with a sophisticated financial advisor persona." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDL_pRr_jHRe5ZOi9qOirx08LxmSFXINY-FQWk_uj6laVLuZ3P5UQqK9CQaC1ODKIDB36pomTvmkwFM02eemontCeWRI3TAfn_1ISaNeIskBoGHnsdSGq5yl-p6X7PTTM4_j30uAmLbEv9_iT--GZqfHBY2oZ0XXAf7xY6NPTt-RC2Za7sN2t1p22zo0p4Or7qOkpRgblLqH1UkfH5GCYyYHUqapa91vBbMz4iZ0CyyaoH3BAvO30G5hSRSYalUKo9FTTpFf3cU7QWv"/>
+</div>
+<h1 class="font-display-lg text-display-lg font-bold text-primary dark:text-primary-fixed">Personal Finance</h1>
+</div>
+<button class="material-symbols-outlined text-primary dark:text-primary-fixed-dim hover:bg-surface-container-low dark:hover:bg-surface-container-highest transition-colors p-2 rounded-full active:opacity-70 transition-opacity">
+                notifications
+            </button>
+</div>
+</header>
+<main class="max-w-2xl mx-auto px-container-margin py-lg space-y-lg">
+<!-- Profile & Mode Section -->
+<section class="space-y-sm">
+<h2 class="font-label-caps text-label-caps text-outline uppercase tracking-wider">Account Identity</h2>
+<div class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
+<div class="p-md flex items-center justify-between hover:bg-slate-50 transition-colors cursor-pointer group">
+<div class="flex items-center gap-md">
+<div class="w-12 h-12 bg-primary-container rounded-lg flex items-center justify-center">
+<span class="material-symbols-outlined text-white">person</span>
+</div>
+<div>
+<p class="font-headline-md text-headline-md text-primary">Alex Chen</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant">alex.chen@harmonize.io</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-outline group-hover:translate-x-1 transition-transform">chevron_right</span>
+</div>
+<div class="p-md border-t border-slate-100 flex items-center justify-between">
+<div class="flex items-center gap-md">
+<span class="material-symbols-outlined text-secondary">group</span>
+<p class="font-body-lg text-body-lg">Household Management</p>
+</div>
+<div class="flex bg-surface-container p-1 rounded-lg">
+<button class="px-sm py-1 rounded-md text-label-caps font-bold transition-all bg-white shadow-sm text-primary">Solo</button>
+<button class="px-sm py-1 rounded-md text-label-caps font-bold transition-all text-on-surface-variant hover:text-primary">Family</button>
+</div>
+</div>
+</div>
+</section>
+<!-- Budgeting Framework -->
+<section class="space-y-sm">
+<h2 class="font-label-caps text-label-caps text-outline uppercase tracking-wider">Budgeting Framework</h2>
+<div class="bg-white rounded-xl shadow-sm border border-slate-200 p-md space-y-md">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-sm">
+<span class="material-symbols-outlined text-tertiary-fixed-dim">pie_chart</span>
+<p class="font-body-lg text-body-lg font-semibold">Active Strategy: 50/30/20</p>
+</div>
+<button class="text-secondary font-label-caps hover:underline">Change</button>
+</div>
+<!-- Strategy Visualization -->
+<div class="h-8 w-full flex rounded-full overflow-hidden">
+<div class="bg-primary h-full flex items-center justify-center text-[10px] text-white font-bold" style="width: 50%">50% NEEDS</div>
+<div class="bg-secondary h-full flex items-center justify-center text-[10px] text-white font-bold" style="width: 30%">30% WANTS</div>
+<div class="bg-tertiary-fixed-dim h-full flex items-center justify-center text-[10px] text-primary font-bold" style="width: 20%">20% SAVINGS</div>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant italic">
+                    Automated allocation across all linked accounts based on the corporate standard for balanced financial health.
+                </p>
+</div>
+</section>
+<!-- Management Tiers -->
+<section class="space-y-sm">
+<h2 class="font-label-caps text-label-caps text-outline uppercase tracking-wider">Configuration</h2>
+<div class="bg-white rounded-xl shadow-sm border border-slate-200 divide-y divide-slate-100">
+<!-- Linked Accounts -->
+<div class="p-md flex items-center justify-between hover:bg-slate-50 transition-colors cursor-pointer group">
+<div class="flex items-center gap-md">
+<span class="material-symbols-outlined text-on-surface-variant">account_balance</span>
+<div class="flex flex-col">
+<span class="font-body-lg text-body-lg">Linked Accounts</span>
+<span class="font-label-caps text-label-caps text-secondary uppercase">3 Accounts Connected</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-outline group-hover:translate-x-1 transition-transform">chevron_right</span>
+</div>
+<!-- Category Management -->
+<div class="p-md flex items-center justify-between hover:bg-slate-50 transition-colors cursor-pointer group">
+<div class="flex items-center gap-md">
+<span class="material-symbols-outlined text-on-surface-variant">category</span>
+<span class="font-body-lg text-body-lg">Category Management</span>
+</div>
+<span class="material-symbols-outlined text-outline group-hover:translate-x-1 transition-transform">chevron_right</span>
+</div>
+<!-- Surprise Expense Alerts -->
+<div class="p-md flex items-center justify-between">
+<div class="flex items-center gap-md">
+<span class="material-symbols-outlined text-on-surface-variant">warning</span>
+<div>
+<span class="font-body-lg text-body-lg block">Impact Alerts</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Notify when a 'Surprise' exceeds 5% of monthly budget</span>
+</div>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-slate-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-secondary"></div>
+</label>
+</div>
+</div>
+</section>
+<!-- Danger Zone -->
+<section class="space-y-sm pt-md">
+<div class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
+<button class="w-full p-md flex items-center gap-md text-error hover:bg-error-container/10 transition-colors group">
+<span class="material-symbols-outlined">logout</span>
+<span class="font-body-lg text-body-lg font-semibold">Sign Out</span>
+</button>
+</div>
+</section>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 py-2 bg-surface dark:bg-navy-deep shadow-lg">
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant px-3 py-1 hover:text-secondary transition-colors active:scale-95 duration-150" href="#">
+<span class="material-symbols-outlined">home</span>
+<span class="font-label-caps text-label-caps">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant px-3 py-1 hover:text-secondary transition-colors active:scale-95 duration-150" href="#">
+<span class="material-symbols-outlined">calendar_month</span>
+<span class="font-label-caps text-label-caps">Planning</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant px-3 py-1 hover:text-secondary transition-colors active:scale-95 duration-150" href="#">
+<span class="material-symbols-outlined">analytics</span>
+<span class="font-label-caps text-label-caps">Review</span>
+</a>
+<a class="flex flex-col items-center justify-center text-secondary dark:text-secondary-fixed font-bold bg-secondary-container/20 dark:bg-secondary-container/10 rounded-xl px-3 py-1 active:scale-95 duration-150" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">settings</span>
+<span class="font-label-caps text-label-caps">Settings</span>
+</a>
+</nav>
+<script>
+        // Simple micro-interaction for toggles
+        document.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
+            checkbox.addEventListener('change', function() {
+                const parent = this.closest('div');
+                if(this.checked) {
+                    parent.classList.add('bg-growth-light/20');
+                } else {
+                    parent.classList.remove('bg-growth-light/20');
+                }
+            });
+        });
+
+        // Add hover effect to the strategy bars
+        const strategyBar = document.querySelector('.h-8.w-full');
+        if(strategyBar) {
+            strategyBar.addEventListener('mousemove', (e) => {
+                const rect = strategyBar.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                // Just a subtle aesthetic trigger
+            });
+        }
+    </script>
+</body></html>

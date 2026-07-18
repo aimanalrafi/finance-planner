@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Review - Harmonize Finance</title>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700;800&amp;family=JetBrains+Mono:wght@500&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-secondary-fixed-variant": "#005236",
+                    "surface": "#f8f9ff",
+                    "error-container": "#ffdad6",
+                    "on-secondary-container": "#00714d",
+                    "on-background": "#0b1c30",
+                    "primary": "#000109",
+                    "background": "#f8f9ff",
+                    "on-tertiary-container": "#b97600",
+                    "inverse-primary": "#b7c6f1",
+                    "surface-dim": "#cbdbf5",
+                    "primary-fixed-dim": "#b7c6f1",
+                    "surface-container-high": "#dce9ff",
+                    "on-primary-fixed": "#091a3c",
+                    "surface-container-low": "#eff4ff",
+                    "surface-tint": "#4f5e83",
+                    "tertiary-fixed-dim": "#ffb95f",
+                    "growth-light": "#ECFDF5",
+                    "on-secondary": "#ffffff",
+                    "on-primary": "#ffffff",
+                    "on-secondary-fixed": "#002113",
+                    "on-primary-fixed-variant": "#37466a",
+                    "on-surface-variant": "#45464e",
+                    "on-primary-container": "#7584ac",
+                    "caution-light": "#FFFBEB",
+                    "surface-variant": "#d3e4fe",
+                    "on-tertiary-fixed": "#2a1700",
+                    "inverse-surface": "#213145",
+                    "tertiary-fixed": "#ffddb8",
+                    "on-error-container": "#93000a",
+                    "on-tertiary-fixed-variant": "#653e00",
+                    "secondary-fixed": "#6ffbbe",
+                    "outline": "#75777f",
+                    "tertiary-container": "#2c1800",
+                    "surface-bright": "#f8f9ff",
+                    "tertiary": "#040100",
+                    "primary-fixed": "#d9e2ff",
+                    "primary-container": "#0a1b3d",
+                    "glass-border": "rgba(255, 255, 255, 0.4)",
+                    "slate-surface": "#F8FAFC",
+                    "secondary": "#006c49",
+                    "surface-container-lowest": "#ffffff",
+                    "outline-variant": "#c5c6cf",
+                    "on-error": "#ffffff",
+                    "on-tertiary": "#ffffff",
+                    "surface-container": "#e5eeff",
+                    "navy-deep": "#060D1F",
+                    "on-surface": "#0b1c30",
+                    "surface-container-highest": "#d3e4fe",
+                    "inverse-on-surface": "#eaf1ff",
+                    "error": "#ba1a1a",
+                    "secondary-container": "#6cf8bb",
+                    "secondary-fixed-dim": "#4edea3"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "xs": "8px",
+                    "sm": "12px",
+                    "lg": "24px",
+                    "xl": "32px",
+                    "base": "4px",
+                    "gutter": "12px",
+                    "md": "16px",
+                    "container-margin": "20px"
+            },
+            "fontFamily": {
+                    "headline-md": ["Hanken Grotesk"],
+                    "display-lg": ["Hanken Grotesk"],
+                    "data-mono": ["JetBrains Mono"],
+                    "body-lg": ["Hanken Grotesk"],
+                    "label-caps": ["Hanken Grotesk"],
+                    "body-sm": ["Hanken Grotesk"]
+            },
+            "fontSize": {
+                    "headline-md": ["22px", {"lineHeight": "28px", "fontWeight": "600"}],
+                    "display-lg": ["34px", {"lineHeight": "41px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "data-mono": ["14px", {"lineHeight": "16px", "letterSpacing": "-0.01em", "fontWeight": "500"}],
+                    "body-lg": ["17px", {"lineHeight": "22px", "fontWeight": "400"}],
+                    "label-caps": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                    "body-sm": ["15px", {"lineHeight": "20px", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body { font-family: 'Hanken Grotesk', sans-serif; -webkit-font-smoothing: antialiased; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        .glass-card { backdrop-filter: blur(20px); background: rgba(255, 255, 255, 0.85); border: 1px solid rgba(226, 232, 240, 1); }
+        .hide-scrollbar::-webkit-scrollbar { display: none; }
+        .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-slate-surface text-on-surface min-h-screen pb-32">
+<!-- Top App Bar (Shared Component Execution) -->
+<header class="w-full sticky top-0 z-50 bg-surface dark:bg-surface-dim flex justify-between items-center px-container-margin py-xs">
+<div class="flex items-center gap-sm">
+<div class="w-10 h-10 rounded-full bg-surface-container-highest flex items-center justify-center overflow-hidden border border-outline-variant">
+<img alt="User Profile" class="w-full h-full object-cover" data-alt="A clean, professional headshot of a friendly financial consultant in a modern office environment. The lighting is soft and natural, emphasizing a trustworthy and sophisticated persona. The background is a minimalist, slightly blurred office space with neutral tones, aligning with a professional corporate aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBQfFi6j_bJ_yqTVu_U4zrpXuO_7dlwBlt-y9LnjfNjeqCxajtBPIHhvHsHJojDagEaaxHd92enie1GQz7Jz4chiioDt_kXzSFS4hclo1Ik7FMFYj_dTkeSpTBDliV-A9lgxVMgzjvM5I_QVclLoRurBQQI8Ht6XF501eaqXDYAE3VaraohyxsCG6965nZFxuOsm0FgilsWjDMp8UIVeXkpzyAkPqIgoczlmv-B37kxzLasiNGDjojAtAFIdVVU-cwES46Xa3S72Dfn"/>
+</div>
+<h1 class="font-headline-md text-headline-md font-bold text-navy-deep">Performance Review</h1>
+</div>
+<button class="p-xs rounded-full hover:bg-surface-container-low transition-colors active:scale-95">
+<span class="material-symbols-outlined text-on-surface-variant">notifications</span>
+</button>
+</header>
+<!-- Month Selector (Interactive Tabs) -->
+<nav class="bg-surface sticky top-[60px] z-40 border-b border-outline-variant/30">
+<div class="flex overflow-x-auto hide-scrollbar px-container-margin py-sm gap-md">
+<!-- Simplified Month List -->
+<button class="flex-shrink-0 px-md py-xs rounded-full font-label-caps text-label-caps text-on-surface-variant hover:bg-surface-container-low transition-colors">JAN</button>
+<button class="flex-shrink-0 px-md py-xs rounded-full font-label-caps text-label-caps text-on-surface-variant hover:bg-surface-container-low transition-colors">FEB</button>
+<button class="flex-shrink-0 px-md py-xs rounded-full font-label-caps text-label-caps bg-navy-deep text-white shadow-sm">MAR</button>
+<button class="flex-shrink-0 px-md py-xs rounded-full font-label-caps text-label-caps text-on-surface-variant opacity-50 cursor-not-allowed">APR</button>
+<button class="flex-shrink-0 px-md py-xs rounded-full font-label-caps text-label-caps text-on-surface-variant opacity-50 cursor-not-allowed">MAY</button>
+<button class="flex-shrink-0 px-md py-xs rounded-full font-label-caps text-label-caps text-on-surface-variant opacity-50 cursor-not-allowed">JUN</button>
+</div>
+</nav>
+<main class="px-container-margin mt-lg max-w-5xl mx-auto space-y-lg">
+<!-- Performance Summary Card -->
+<section class="glass-card rounded-xl p-lg shadow-sm relative overflow-hidden">
+<div class="absolute top-0 right-0 p-lg">
+<span class="inline-flex items-center px-sm py-base rounded-full bg-growth-light text-on-secondary-container font-label-caps text-label-caps border border-on-secondary-container/10">
+<span class="material-symbols-outlined text-[14px] mr-1" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+                    BUDGET HEALTH: EXCELLENT
+                </span>
+</div>
+<div class="space-y-base">
+<p class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-widest">Net Position March 2024</p>
+<h2 class="font-display-lg text-display-lg text-navy-deep">+€1,240.50</h2>
+</div>
+<div class="mt-lg grid grid-cols-2 gap-md pt-lg border-t border-outline-variant/30">
+<div>
+<p class="font-label-caps text-label-caps text-on-surface-variant">TOTAL INFLOW</p>
+<p class="font-headline-md text-headline-md text-secondary">€5,400.00</p>
+</div>
+<div>
+<p class="font-label-caps text-label-caps text-on-surface-variant">TOTAL OUTFLOW</p>
+<p class="font-headline-md text-headline-md text-navy-deep">€4,159.50</p>
+</div>
+</div>
+</section>
+<!-- Category Breakdown Section -->
+<section class="space-y-md">
+<h3 class="font-headline-md text-headline-md text-navy-deep">Bucket Breakdown</h3>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-md">
+<!-- Needs Card -->
+<div class="bg-white border border-outline-variant p-md rounded-xl space-y-md">
+<div class="flex justify-between items-start">
+<div class="space-y-base">
+<span class="material-symbols-outlined text-navy-deep" style="font-variation-settings: 'FILL' 1;">home_work</span>
+<p class="font-headline-md text-[18px] font-bold">Needs</p>
+</div>
+<span class="px-xs py-base bg-surface-container-low text-on-surface-variant font-label-caps text-[10px] rounded border border-outline-variant/20">STABLE</span>
+</div>
+<div class="space-y-xs">
+<div class="flex justify-between font-body-sm text-body-sm">
+<span class="text-on-surface-variant">Planned</span>
+<span class="font-data-mono">€2,400.00</span>
+</div>
+<div class="flex justify-between font-body-sm text-body-sm">
+<span class="text-on-surface-variant">Actual</span>
+<span class="font-data-mono font-bold">€2,392.10</span>
+</div>
+</div>
+<div class="pt-sm border-t border-dashed border-outline-variant flex justify-between items-center">
+<span class="font-label-caps text-label-caps text-on-surface-variant">DELTA</span>
+<span class="font-data-mono text-secondary">-€7.90</span>
+</div>
+</div>
+<!-- Wants Card -->
+<div class="bg-white border border-outline-variant p-md rounded-xl space-y-md">
+<div class="flex justify-between items-start">
+<div class="space-y-base">
+<span class="material-symbols-outlined text-navy-deep" style="font-variation-settings: 'FILL' 1;">shopping_bag</span>
+<p class="font-headline-md text-[18px] font-bold">Wants</p>
+</div>
+<span class="px-xs py-base bg-growth-light text-on-secondary-container font-label-caps text-[10px] rounded border border-on-secondary-container/10">UNDER</span>
+</div>
+<div class="space-y-xs">
+<div class="flex justify-between font-body-sm text-body-sm">
+<span class="text-on-surface-variant">Planned</span>
+<span class="font-data-mono">€1,200.00</span>
+</div>
+<div class="flex justify-between font-body-sm text-body-sm">
+<span class="text-on-surface-variant">Actual</span>
+<span class="font-data-mono font-bold">€1,010.00</span>
+</div>
+</div>
+<div class="pt-sm border-t border-dashed border-outline-variant flex justify-between items-center">
+<span class="font-label-caps text-label-caps text-on-surface-variant">DELTA</span>
+<span class="font-data-mono text-secondary">-€190.00</span>
+</div>
+</div>
+<!-- Savings Card -->
+<div class="bg-white border border-outline-variant p-md rounded-xl space-y-md">
+<div class="flex justify-between items-start">
+<div class="space-y-base">
+<span class="material-symbols-outlined text-navy-deep" style="font-variation-settings: 'FILL' 1;">savings</span>
+<p class="font-headline-md text-[18px] font-bold">Savings</p>
+</div>
+<span class="px-xs py-base bg-caution-light text-on-tertiary-container font-label-caps text-[10px] rounded border border-on-tertiary-container/10">STABLE</span>
+</div>
+<div class="space-y-xs">
+<div class="flex justify-between font-body-sm text-body-sm">
+<span class="text-on-surface-variant">Target</span>
+<span class="font-data-mono">€750.00</span>
+</div>
+<div class="flex justify-between font-body-sm text-body-sm">
+<span class="text-on-surface-variant">Actual</span>
+<span class="font-data-mono font-bold">€757.40</span>
+</div>
+</div>
+<div class="pt-sm border-t border-dashed border-outline-variant flex justify-between items-center">
+<span class="font-label-caps text-label-caps text-on-surface-variant">DELTA</span>
+<span class="font-data-mono text-secondary">+€7.40</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Surprise Expense Summary -->
+<section class="space-y-md">
+<h3 class="font-headline-md text-headline-md text-navy-deep">Surprise Expenses</h3>
+<div class="bg-caution-light border border-on-tertiary-container/10 rounded-xl p-md overflow-hidden relative">
+<div class="absolute -right-4 -top-4 opacity-10">
+<span class="material-symbols-outlined text-[120px] text-tertiary">warning</span>
+</div>
+<div class="relative z-10 flex flex-col gap-sm">
+<div class="flex items-center justify-between p-sm bg-white/50 rounded-lg border border-on-tertiary-container/5">
+<div class="flex items-center gap-sm">
+<span class="material-symbols-outlined text-on-tertiary-container">plumbing</span>
+<div>
+<p class="font-body-lg text-body-lg font-bold">Leaky Pipe Repair</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant">March 14 • Home Maintenance</p>
+</div>
+</div>
+<p class="font-data-mono text-error font-bold">€185.00</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Annual Trend Shortcut -->
+<button class="w-full bg-navy-deep text-white rounded-xl p-lg flex items-center justify-between group hover:bg-primary transition-all shadow-lg active:scale-[0.98]">
+<div class="flex items-center gap-md text-left">
+<div class="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center">
+<span class="material-symbols-outlined text-primary-fixed">query_stats</span>
+</div>
+<div>
+<h4 class="font-headline-md text-headline-md">Zoom to Year View</h4>
+<p class="font-body-sm text-body-sm text-primary-fixed/70">Analyze 12-month performance &amp; patterns</p>
+</div>
+</div>
+<span class="material-symbols-outlined group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</button>
+</main>
+<!-- Bottom Navigation (Shared Component Execution) -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-gutter pb-safe pt-xs bg-surface-container-lowest dark:bg-navy-deep shadow-sm">
+<!-- Home -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant px-xs py-base hover:opacity-80 active:scale-90 transition-all duration-200" href="#">
+<span class="material-symbols-outlined">home</span>
+<span class="font-label-caps text-label-caps">Home</span>
+</a>
+<!-- Planning -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant px-xs py-base hover:opacity-80 active:scale-90 transition-all duration-200" href="#">
+<span class="material-symbols-outlined">event_note</span>
+<span class="font-label-caps text-label-caps">Planning</span>
+</a>
+<!-- Review (ACTIVE) -->
+<a class="flex flex-col items-center justify-center text-secondary dark:text-secondary-fixed bg-secondary-container/20 rounded-xl px-xs py-base hover:opacity-80 active:scale-90 transition-all duration-200" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">analytics</span>
+<span class="font-label-caps text-label-caps">Review</span>
+</a>
+<!-- Settings -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant px-xs py-base hover:opacity-80 active:scale-90 transition-all duration-200" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-label-caps text-label-caps">Settings</span>
+</a>
+</nav>
+<!-- Lightweight Atmospheric Interaction Script -->
+<script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Micro-interaction for cards
+            const cards = document.querySelectorAll('.bg-white.border');
+            cards.forEach(card => {
+                card.addEventListener('touchstart', () => {
+                    card.style.transform = 'scale(0.98)';
+                });
+                card.addEventListener('touchend', () => {
+                    card.style.transform = 'scale(1)';
+                });
+            });
+        });
+    </script>
+</body></html>
