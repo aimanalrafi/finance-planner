@@ -59,6 +59,10 @@ export async function PUT(req: NextRequest) {
     updates.push("onboarded = ?");
     args.push(body.onboarded ? 1 : 0);
   }
+  if (body.tour_seen !== undefined) {
+    updates.push("tour_seen = ?");
+    args.push(body.tour_seen ? 1 : 0);
+  }
 
   if (updates.length > 0) {
     d.prepare(`UPDATE settings SET ${updates.join(", ")} WHERE id = 1`).run(...args);

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useMonth } from "@/components/MonthContext";
 import { MonthSwitcher } from "@/components/MonthSwitcher";
 import { SurpriseFlow } from "@/components/surprise/SurpriseFlow";
@@ -17,6 +17,15 @@ const BUCKET_ORDER: Bucket[] = ["needs", "wants", "savings"];
 export default function HomePage() {
   const { bundle } = useMonth();
   const [surpriseOpen, setSurpriseOpen] = useState(false);
+
+  // hand-off from the help tour's "Try the surprise flow" button
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    if (params.get("surprise") === "1") {
+      setSurpriseOpen(true);
+      window.history.replaceState(null, "", "/");
+    }
+  }, []);
 
   if (!bundle) return null;
 

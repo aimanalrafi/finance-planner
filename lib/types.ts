@@ -10,6 +10,7 @@ export interface Settings {
   savings_pct: number;
   onboarded: boolean;
   surprise_alert_pct: number;
+  tour_seen: boolean;
   persons: { id: number; name: string }[];
 }
 

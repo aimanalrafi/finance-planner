@@ -26,7 +26,8 @@ function migrate(d: Database.Database) {
     wants_pct REAL NOT NULL DEFAULT 30,
     savings_pct REAL NOT NULL DEFAULT 20,
     onboarded INTEGER NOT NULL DEFAULT 0,
-    surprise_alert_pct REAL NOT NULL DEFAULT 5
+    surprise_alert_pct REAL NOT NULL DEFAULT 5,
+    tour_seen INTEGER NOT NULL DEFAULT 0
   );
 
   CREATE TABLE IF NOT EXISTS persons (
@@ -114,9 +115,14 @@ function migrate(d: Database.Database) {
   CREATE INDEX IF NOT EXISTS idx_login_ip ON login_attempts(ip, attempted_at);
   `);
 
-  // additive migration for databases created before actions_json existed
+  // additive migrations for databases created before these columns existed
   try {
     d.exec("ALTER TABLE month_closes ADD COLUMN actions_json TEXT NOT NULL DEFAULT '[]'");
+  } catch {
+    /* column already exists */
+  }
+  try {
+    d.exec("ALTER TABLE settings ADD COLUMN tour_seen INTEGER NOT NULL DEFAULT 0");
   } catch {
     /* column already exists */
   }

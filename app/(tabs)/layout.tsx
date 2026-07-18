@@ -5,6 +5,8 @@ import { usePathname, useRouter } from "next/navigation";
 import { AppHeader } from "@/components/AppHeader";
 import { TabBar } from "@/components/TabBar";
 import { MonthProvider, useMonth } from "@/components/MonthContext";
+import { TourProvider } from "@/components/tour/TourContext";
+import { HelpTour } from "@/components/tour/HelpTour";
 
 function OnboardingGate({ children }: { children: React.ReactNode }) {
   const { settings, loading } = useMonth();
@@ -31,11 +33,14 @@ function OnboardingGate({ children }: { children: React.ReactNode }) {
 export default function TabsLayout({ children }: { children: React.ReactNode }) {
   return (
     <MonthProvider>
-      <AppHeader />
-      <main className="max-w-lg mx-auto px-5 pb-32 pt-4">
-        <OnboardingGate>{children}</OnboardingGate>
-      </main>
-      <TabBar />
+      <TourProvider>
+        <AppHeader />
+        <main className="max-w-lg mx-auto px-5 pb-32 pt-4">
+          <OnboardingGate>{children}</OnboardingGate>
+        </main>
+        <TabBar />
+        <HelpTour />
+      </TourProvider>
     </MonthProvider>
   );
 }

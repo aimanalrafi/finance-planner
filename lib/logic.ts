@@ -33,6 +33,7 @@ export function getSettings(): Settings {
     savings_pct: s.savings_pct as number,
     onboarded: !!s.onboarded,
     surprise_alert_pct: s.surprise_alert_pct as number,
+    tour_seen: !!s.tour_seen,
     persons,
   };
 }

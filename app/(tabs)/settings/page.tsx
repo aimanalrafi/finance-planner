@@ -7,9 +7,11 @@ import { AccountIdentityCard } from "@/components/settings/AccountIdentityCard";
 import { FrameworkCard } from "@/components/settings/FrameworkCard";
 import { CategoryManager } from "@/components/settings/CategoryManager";
 import { ImpactAlertsRow } from "@/components/settings/ImpactAlertsRow";
+import { useTour } from "@/components/tour/TourContext";
 
 export default function SettingsPage() {
   const { settings, refresh, loading } = useMonth();
+  const { openTour } = useTour();
   const [signingOut, setSigningOut] = useState(false);
 
   async function signOut() {
@@ -47,6 +49,15 @@ export default function SettingsPage() {
         <div className="card overflow-hidden divide-y divide-line">
           <CategoryManager settings={settings} />
           <ImpactAlertsRow settings={settings} onSaved={refresh} />
+          <button
+            onClick={openTour}
+            className="w-full p-4 flex items-center gap-3 text-left active:bg-slate-surface transition"
+          >
+            <Icon name="help" size={22} className="text-muted" />
+            <span className="font-semibold flex-1">App Tour</span>
+            <span className="text-xs text-faint">Replay the intro</span>
+            <Icon name="chevron_right" size={20} className="text-faint" />
+          </button>
         </div>
       </section>
 
