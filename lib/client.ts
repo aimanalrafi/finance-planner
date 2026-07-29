@@ -20,18 +20,36 @@ export async function api<T = unknown>(
   return data as T;
 }
 
+const CURRENCY_SYMBOLS: Record<string, string> = {
+  EUR: "€",
+  USD: "$",
+  GBP: "£",
+  MYR: "RM",
+  SGD: "S$",
+  JPY: "¥",
+  AUD: "A$",
+  CAD: "C$",
+  INR: "₹",
+};
+
+let currentCurrency = "EUR";
+
+export function setCurrency(code: string) {
+  currentCurrency = code;
+}
+
+export function currencySymbol(): string {
+  return CURRENCY_SYMBOLS[currentCurrency] ?? currentCurrency;
+}
+
 export function euro(n: number, opts?: { sign?: boolean; decimals?: number }): string {
   const decimals = opts?.decimals ?? 2;
   const sign = opts?.sign && n > 0 ? "+" : "";
-  return (
-    sign +
-    new Intl.NumberFormat("de-DE", {
-      style: "currency",
-      currency: "EUR",
-      minimumFractionDigits: decimals,
-      maximumFractionDigits: decimals,
-    }).format(n)
-  );
+  const number = new Intl.NumberFormat("de-DE", {
+    minimumFractionDigits: decimals,
+    maximumFractionDigits: decimals,
+  }).format(n);
+  return `${sign}${number} ${currencySymbol()}`;
 }
 
 export function pct(n: number): string {

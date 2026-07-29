@@ -56,6 +56,10 @@ export async function PUT(
     updates.push("archived = ?");
     args.push(body.archived ? 1 : 0);
   }
+  if (body.auto_paid !== undefined) {
+    updates.push("auto_paid = ?");
+    args.push(body.auto_paid ? 1 : 0);
+  }
   if (updates.length === 0) return NextResponse.json({ ok: true });
   args.push(catId);
   d.prepare(`UPDATE categories SET ${updates.join(", ")} WHERE id = ?`).run(...args);

@@ -1,6 +1,7 @@
 export type Bucket = "needs" | "wants" | "savings";
 export type OwnerTag = "p1" | "p2" | "joint" | null;
 export type Framework = "50/30/20" | "70/20/10" | "zero" | "pyf" | "custom";
+export type CurrencyCode = "EUR" | "USD" | "GBP" | "MYR" | "SGD" | "JPY" | "AUD" | "CAD" | "INR";
 
 export interface Settings {
   mode: "solo" | "household";
@@ -11,6 +12,7 @@ export interface Settings {
   onboarded: boolean;
   surprise_alert_pct: number;
   tour_seen: boolean;
+  currency: CurrencyCode;
   persons: { id: number; name: string }[];
 }
 
@@ -24,6 +26,7 @@ export interface Category {
   invest_type: string | null;
   archived: boolean;
   sort: number;
+  auto_paid: boolean;    // fixed cost: always counted as paid, no manual expense logging
 }
 
 export interface IncomeSource {

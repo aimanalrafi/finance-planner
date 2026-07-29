@@ -9,6 +9,8 @@ export async function GET(req: NextRequest) {
   return NextResponse.json(getSettings());
 }
 
+const CURRENCIES = ["EUR", "USD", "GBP", "MYR", "SGD", "JPY", "AUD", "CAD", "INR"];
+
 const FRAMEWORKS: Record<string, [number, number, number] | null> = {
   "50/30/20": [50, 30, 20],
   "70/20/10": [70, 20, 10],
@@ -62,6 +64,11 @@ export async function PUT(req: NextRequest) {
   if (body.tour_seen !== undefined) {
     updates.push("tour_seen = ?");
     args.push(body.tour_seen ? 1 : 0);
+  }
+  if (body.currency !== undefined) {
+    if (!CURRENCIES.includes(body.currency as string)) return badRequest("Invalid currency");
+    updates.push("currency = ?");
+    args.push(body.currency);
   }
 
   if (updates.length > 0) {

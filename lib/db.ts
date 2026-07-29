@@ -27,7 +27,8 @@ function migrate(d: Database.Database) {
     savings_pct REAL NOT NULL DEFAULT 20,
     onboarded INTEGER NOT NULL DEFAULT 0,
     surprise_alert_pct REAL NOT NULL DEFAULT 5,
-    tour_seen INTEGER NOT NULL DEFAULT 0
+    tour_seen INTEGER NOT NULL DEFAULT 0,
+    currency TEXT NOT NULL DEFAULT 'EUR'
   );
 
   CREATE TABLE IF NOT EXISTS persons (
@@ -53,7 +54,8 @@ function migrate(d: Database.Database) {
     is_buffer INTEGER NOT NULL DEFAULT 0,
     invest_type TEXT,                                -- e.g. 'stocks' | 'property' for savings bucket
     archived INTEGER NOT NULL DEFAULT 0,
-    sort INTEGER NOT NULL DEFAULT 0
+    sort INTEGER NOT NULL DEFAULT 0,
+    auto_paid INTEGER NOT NULL DEFAULT 0            -- fixed costs (rent etc.): always counted as paid, no manual logging
   );
 
   CREATE TABLE IF NOT EXISTS plans (
@@ -126,6 +128,19 @@ function migrate(d: Database.Database) {
   } catch {
     /* column already exists */
   }
+  try {
+    d.exec("ALTER TABLE settings ADD COLUMN currency TEXT NOT NULL DEFAULT 'EUR'");
+  } catch {
+    /* column already exists */
+  }
+  try {
+    d.exec("ALTER TABLE categories ADD COLUMN auto_paid INTEGER NOT NULL DEFAULT 0");
+  } catch {
+    /* column already exists */
+  }
+
+  // one-time data fixup: mark known fixed housing costs as auto_paid, drop the unused Gas category
+  markFixedCostsAndDropGas(d);
 
   const row = d.prepare("SELECT COUNT(*) AS c FROM settings").get() as { c: number };
   if (row.c === 0) {
@@ -139,13 +154,40 @@ function migrate(d: Database.Database) {
   if (cc.c === 0) seedCategories(d);
 }
 
+/** Idempotent: safe to run on every startup. Never deletes data with history — archives instead. */
+function markFixedCostsAndDropGas(d: Database.Database) {
+  d.prepare(
+    `UPDATE categories SET auto_paid = 1
+     WHERE bucket = 'needs' AND name IN ('Rent', 'Strom', 'Internet', 'Rundfunkbeitrag') AND auto_paid = 0`
+  ).run();
+
+  const gas = d.prepare("SELECT id FROM categories WHERE name = 'Gas'").get() as
+    | { id: number }
+    | undefined;
+  if (!gas) return;
+  const used = d
+    .prepare(
+      `SELECT (SELECT COUNT(*) FROM expenses WHERE category_id = @id)
+             + (SELECT COUNT(*) FROM plans WHERE category_id = @id AND planned != 0)
+             + (SELECT COUNT(*) FROM instalments WHERE category_id = @id)
+             + (SELECT COUNT(*) FROM recurring WHERE category_id = @id) AS c`
+    )
+    .get({ id: gas.id }) as { c: number };
+  if (used.c > 0) {
+    d.prepare("UPDATE categories SET archived = 1 WHERE id = ?").run(gas.id);
+  } else {
+    d.prepare("DELETE FROM categories WHERE id = ?").run(gas.id);
+  }
+}
+
+const FIXED_COST_NAMES = new Set(["Rent", "Strom", "Internet", "Rundfunkbeitrag"]);
+
 function seedCategories(d: Database.Database) {
   const ins = d.prepare(
-    "INSERT INTO categories (bucket, name, icon, owner_tag, is_buffer, invest_type, sort) VALUES (?, ?, ?, ?, ?, ?, ?)"
+    "INSERT INTO categories (bucket, name, icon, owner_tag, is_buffer, invest_type, sort, auto_paid) VALUES (?, ?, ?, ?, ?, ?, ?, ?)"
   );
   const needs: [string, string][] = [
     ["Rent", "home"],
-    ["Gas", "local_fire_department"],
     ["Strom", "bolt"],
     ["Internet", "wifi"],
     ["Rundfunkbeitrag", "radio"],
@@ -169,11 +211,13 @@ function seedCategories(d: Database.Database) {
     ["Subscriptions", "subscriptions"],
   ];
   const tx = d.transaction(() => {
-    needs.forEach(([name, icon], i) => ins.run("needs", name, icon, null, 0, null, i));
-    wants.forEach(([name, icon], i) => ins.run("wants", name, icon, null, 0, null, i));
-    ins.run("savings", "Savings", "savings", null, 0, null, 0);
-    ins.run("savings", "Investments", "trending_up", null, 0, "stocks", 1);
-    ins.run("savings", "Emergency Buffer", "shield", null, 1, null, 2);
+    needs.forEach(([name, icon], i) =>
+      ins.run("needs", name, icon, null, 0, null, i, FIXED_COST_NAMES.has(name) ? 1 : 0)
+    );
+    wants.forEach(([name, icon], i) => ins.run("wants", name, icon, null, 0, null, i, 0));
+    ins.run("savings", "Savings", "savings", null, 0, null, 0, 0);
+    ins.run("savings", "Investments", "trending_up", null, 0, "stocks", 1, 0);
+    ins.run("savings", "Emergency Buffer", "shield", null, 1, null, 2, 0);
   });
   tx();
 }

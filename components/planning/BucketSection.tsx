@@ -4,10 +4,42 @@ import { useState } from "react";
 import { Icon } from "@/components/Icon";
 import { CurrencyInput } from "@/components/CurrencyInput";
 import { ProgressBar } from "@/components/ProgressBar";
-import { euro } from "@/lib/client";
+import { api, euro } from "@/lib/client";
 import type { BucketSummary, CategoryMonth, Settings } from "@/lib/types";
 import { AddCategoryModal } from "./AddCategoryModal";
-import { BucketMeta, OwnerPill } from "./shared";
+import { BucketMeta, bucketMeta, OwnerPill } from "./shared";
+
+/** Compact "remaining in other buckets" strip, so you don't have to leave this one to check. */
+function OtherBucketsRemaining({
+  current,
+  allBuckets,
+}: {
+  current: BucketSummary["bucket"];
+  allBuckets: BucketSummary[];
+}) {
+  const others = allBuckets.filter((b) => b.bucket !== current);
+  if (others.length === 0) return null;
+  return (
+    <div className="flex gap-2 mb-3 flex-wrap">
+      {others.map((b) => {
+        const meta = bucketMeta(b.bucket);
+        const remaining = Math.round((b.planned - b.actual) * 100) / 100;
+        return (
+          <div
+            key={b.bucket}
+            className={`flex items-center gap-1.5 rounded-full px-2.5 py-1 text-xs font-semibold ${meta.chipBg} ${meta.chipText}`}
+          >
+            <Icon name={meta.icon} size={14} />
+            <span>{meta.name}</span>
+            <span className={`data-mono ${remaining < 0 ? "text-error" : ""}`}>
+              {euro(remaining)} left
+            </span>
+          </div>
+        );
+      })}
+    </div>
+  );
+}
 
 /** Green when planned% is close to the target%, amber when drifting, faint when far. */
 function proximityClass(plannedPct: number, target: number): string {
@@ -23,16 +55,39 @@ function CategoryRow({
   settings,
   draftValue,
   onChange,
+  onNote,
+  refresh,
 }: {
   cat: CategoryMonth;
   meta: BucketMeta;
   settings: Settings | null;
   draftValue: string;
   onChange: (v: string) => void;
+  onNote: (msg: string) => void;
+  refresh: () => void;
 }) {
   const household = settings?.mode === "household";
   const plannedNum = Number(draftValue) || 0;
   const total = plannedNum + cat.auto_planned;
+  const [busy, setBusy] = useState(false);
+
+  async function remove() {
+    setBusy(true);
+    try {
+      const res = await api<{ archived?: boolean; deleted?: boolean }>(
+        `/api/categories/${cat.id}`,
+        { method: "DELETE" }
+      );
+      if (res.archived) {
+        onNote(`"${cat.name}" has history, so it was archived instead of deleted.`);
+      }
+      refresh();
+    } catch (e) {
+      onNote(e instanceof Error ? e.message : "Failed to delete category");
+    } finally {
+      setBusy(false);
+    }
+  }
 
   return (
     <div className="py-3 border-b border-line last:border-b-0">
@@ -56,15 +111,29 @@ function CategoryRow({
                 {cat.invest_type}
               </span>
             )}
+            {cat.auto_paid && (
+              <span className="inline-flex items-center rounded-full bg-cream px-2 py-0.5 text-[10px] font-bold text-amber">
+                FIXED
+              </span>
+            )}
           </div>
         </div>
         <div className="w-24 shrink-0">
           <CurrencyInput value={draftValue} onChange={onChange} />
         </div>
+        <button
+          onClick={remove}
+          disabled={busy}
+          aria-label={`Delete ${cat.name}`}
+          className="shrink-0 w-8 h-8 rounded-lg flex items-center justify-center text-faint active:scale-[0.95] transition disabled:opacity-50"
+        >
+          <Icon name="delete" size={18} />
+        </button>
       </div>
 
-      {/* actual progress under the category */}
-      {(cat.actual > 0 || total > 0) && (
+      {/* actual progress under the category, only once money has actually been spent —
+          fixed costs are always considered paid, so there's nothing to show here */}
+      {!cat.auto_paid && cat.actual > 0 && (
         <div className="mt-2 pl-12 pr-1">
           <ProgressBar value={cat.actual} max={total} tone={meta.tone} height={5} />
           <div className="flex justify-between mt-1 text-[10px] text-faint">
@@ -106,24 +175,31 @@ function CategoryRow({
 export function BucketSection({
   meta,
   summary,
+  allBuckets,
   categories,
   income,
   settings,
   draft,
   onPlannedChange,
+  onNote,
   refresh,
 }: {
   meta: BucketMeta;
   summary: BucketSummary | undefined;
+  allBuckets: BucketSummary[];
   categories: CategoryMonth[];
   income: number;
   settings: Settings | null;
   draft: Record<number, string>;
   onPlannedChange: (id: number, v: string) => void;
+  onNote: (msg: string) => void;
   refresh: () => void;
 }) {
   const [open, setOpen] = useState(true);
   const [addOpen, setAddOpen] = useState(false);
+
+  const fixedCats = categories.filter((c) => c.auto_paid);
+  const regularCats = categories.filter((c) => !c.auto_paid);
 
   const plannedOf = (c: CategoryMonth) =>
     Number(draft[c.id] ?? String(c.planned)) || 0;
@@ -162,11 +238,30 @@ export function BucketSection({
 
       {open && (
         <div className="px-4 pb-4">
+          <OtherBucketsRemaining current={meta.bucket} allBuckets={allBuckets} />
           <p className="label-caps text-faint mb-1">Target {Math.round(target)}%</p>
           {categories.length === 0 && (
             <p className="text-sm text-faint py-2">No categories yet.</p>
           )}
-          {categories.map((c) => (
+          {fixedCats.length > 0 && (
+            <>
+              <p className="label-caps text-faint mt-1 mb-0.5">Fixed Costs</p>
+              {fixedCats.map((c) => (
+                <CategoryRow
+                  key={c.id}
+                  cat={c}
+                  meta={meta}
+                  settings={settings}
+                  draftValue={draft[c.id] ?? String(c.planned)}
+                  onChange={(v) => onPlannedChange(c.id, v)}
+                  onNote={onNote}
+                  refresh={refresh}
+                />
+              ))}
+              <p className="label-caps text-faint mt-3 mb-0.5">Other</p>
+            </>
+          )}
+          {regularCats.map((c) => (
             <CategoryRow
               key={c.id}
               cat={c}
@@ -174,6 +269,8 @@ export function BucketSection({
               settings={settings}
               draftValue={draft[c.id] ?? String(c.planned)}
               onChange={(v) => onPlannedChange(c.id, v)}
+              onNote={onNote}
+              refresh={refresh}
             />
           ))}
 

@@ -66,7 +66,7 @@ export function SurpriseFlow({
   }, [open]);
 
   const categories = useMemo(
-    () => (bundle?.categories ?? []).filter((c) => !c.archived),
+    () => (bundle?.categories ?? []).filter((c) => !c.archived && !c.auto_paid),
     [bundle],
   );
 

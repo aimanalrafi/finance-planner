@@ -2,7 +2,7 @@
 
 import { createContext, useCallback, useContext, useEffect, useState } from "react";
 import { currentMonth } from "@/lib/months";
-import { api } from "@/lib/client";
+import { api, setCurrency } from "@/lib/client";
 import type { MonthBundle, Settings } from "@/lib/types";
 
 interface MonthCtx {
@@ -33,6 +33,7 @@ export function MonthProvider({ children }: { children: React.ReactNode }) {
       .then((b) => {
         if (!cancelled) {
           setBundle(b);
+          setCurrency(b.settings.currency);
           setError(null);
         }
       })

@@ -1,5 +1,7 @@
 "use client";
 
+import { currencySymbol } from "@/lib/client";
+
 export function CurrencyInput({
   value,
   onChange,
@@ -40,7 +42,7 @@ export function CurrencyInput({
           large ? "right-5 text-2xl" : "right-4 text-base"
         }`}
       >
-        €
+        {currencySymbol()}
       </span>
     </div>
   );

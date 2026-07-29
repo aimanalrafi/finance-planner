@@ -34,8 +34,17 @@ export async function POST(req: NextRequest) {
     .get(bucket) as { m: number };
   const r = d
     .prepare(
-      "INSERT INTO categories (bucket, name, icon, owner_tag, is_buffer, invest_type, sort) VALUES (?, ?, ?, ?, ?, ?, ?)"
+      "INSERT INTO categories (bucket, name, icon, owner_tag, is_buffer, invest_type, sort, auto_paid) VALUES (?, ?, ?, ?, ?, ?, ?, ?)"
     )
-    .run(bucket, name, icon, ownerTag(body.owner_tag), body.is_buffer ? 1 : 0, invest, max.m + 1);
+    .run(
+      bucket,
+      name,
+      icon,
+      ownerTag(body.owner_tag),
+      body.is_buffer ? 1 : 0,
+      invest,
+      max.m + 1,
+      body.auto_paid ? 1 : 0
+    );
   return NextResponse.json({ id: r.lastInsertRowid });
 }

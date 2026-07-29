@@ -34,6 +34,7 @@ export function getSettings(): Settings {
     onboarded: !!s.onboarded,
     surprise_alert_pct: s.surprise_alert_pct as number,
     tour_seen: !!s.tour_seen,
+    currency: s.currency as Settings["currency"],
     persons,
   };
 }
@@ -49,6 +50,7 @@ function rowToCategory(r: Record<string, unknown>): Category {
     invest_type: (r.invest_type ?? null) as string | null,
     archived: !!r.archived,
     sort: r.sort as number,
+    auto_paid: !!r.auto_paid,
   };
 }
 
@@ -190,13 +192,16 @@ export function getMonthBundle(month: string): MonthBundle {
       instItems.reduce((s, i) => s + i.monthly, 0) +
       recItems.reduce((s, r) => s + r.amount, 0);
     const p = planned.get(c.id) || 0;
+    const totalPlanned = Math.round((p + auto) * 100) / 100;
+    // fixed costs (rent etc.) are always counted as paid once planned — no manual logging
+    const actual = c.auto_paid ? totalPlanned : Math.round((actualByCat.get(c.id) || 0) * 100) / 100;
     return {
       ...c,
       planned: p,
       auto_planned: Math.round(auto * 100) / 100,
-      actual: Math.round((actualByCat.get(c.id) || 0) * 100) / 100,
+      actual,
       tentative_total: Math.round((tentByCat.get(c.id) || 0) * 100) / 100,
-      total_planned: Math.round((p + auto) * 100) / 100,
+      total_planned: totalPlanned,
       instalment_items: instItems,
       recurring_items: recItems,
     };

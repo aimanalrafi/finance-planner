@@ -36,6 +36,7 @@ function EditForm({
   const [bucket, setBucket] = useState<Bucket>(cat.bucket);
   const [owner, setOwner] = useState<OwnerTag>(cat.owner_tag);
   const [invest, setInvest] = useState<string | null>(cat.invest_type);
+  const [autoPaid, setAutoPaid] = useState(cat.auto_paid);
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -57,6 +58,7 @@ function EditForm({
           bucket,
           owner_tag: household ? owner : null,
           invest_type: bucket === "savings" ? invest : null,
+          auto_paid: bucket === "needs" ? autoPaid : false,
         },
       });
       onSaved();
@@ -136,6 +138,31 @@ function EditForm({
               </button>
             ))}
           </div>
+        </div>
+      )}
+
+      {bucket === "needs" && (
+        <div className="flex items-center justify-between gap-3 rounded-(--radius-field) border border-line bg-white px-3 py-2.5">
+          <div>
+            <p className="text-sm font-semibold">Fixed cost</p>
+            <p className="text-xs text-muted">
+              Always counted as paid once planned — no expense logging needed (e.g. rent, utilities).
+            </p>
+          </div>
+          <button
+            role="switch"
+            aria-checked={autoPaid}
+            onClick={() => setAutoPaid((v) => !v)}
+            className={`relative w-11 h-6 rounded-full shrink-0 transition-colors ${
+              autoPaid ? "bg-emerald" : "bg-lav"
+            }`}
+          >
+            <span
+              className={`absolute top-1 left-1 w-4 h-4 rounded-full bg-white shadow transition-transform ${
+                autoPaid ? "translate-x-5" : ""
+              }`}
+            />
+          </button>
         </div>
       )}
 

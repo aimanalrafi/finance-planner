@@ -7,6 +7,7 @@ import { AccountIdentityCard } from "@/components/settings/AccountIdentityCard";
 import { FrameworkCard } from "@/components/settings/FrameworkCard";
 import { CategoryManager } from "@/components/settings/CategoryManager";
 import { ImpactAlertsRow } from "@/components/settings/ImpactAlertsRow";
+import { CurrencyRow } from "@/components/settings/CurrencyRow";
 import { useTour } from "@/components/tour/TourContext";
 
 export default function SettingsPage() {
@@ -49,6 +50,7 @@ export default function SettingsPage() {
         <div className="card overflow-hidden divide-y divide-line">
           <CategoryManager settings={settings} />
           <ImpactAlertsRow settings={settings} onSaved={refresh} />
+          <CurrencyRow settings={settings} onSaved={refresh} />
           <button
             onClick={openTour}
             className="w-full p-4 flex items-center gap-3 text-left active:bg-slate-surface transition"

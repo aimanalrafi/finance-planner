@@ -23,6 +23,7 @@ export default function PlanningPage() {
   const [draft, setDraft] = useState<Record<number, string>>({});
   const [saving, setSaving] = useState(false);
   const [saveErr, setSaveErr] = useState<string | null>(null);
+  const [planNote, setPlanNote] = useState<string | null>(null);
   const [confirmed, setConfirmed] = useState(false);
   const [fabOpen, setFabOpen] = useState(false);
   const [startBusy, setStartBusy] = useState(false);
@@ -184,11 +185,13 @@ export default function PlanningPage() {
             key={meta.bucket}
             meta={meta}
             summary={bundle.buckets.find((b) => b.bucket === meta.bucket)}
+            allBuckets={bundle.buckets}
             categories={categories.filter((c) => c.bucket === meta.bucket)}
             income={bundle.total_income}
             settings={settings}
             draft={draft}
             onPlannedChange={onPlannedChange}
+            onNote={setPlanNote}
             refresh={refresh}
           />
         ))}
@@ -196,6 +199,9 @@ export default function PlanningPage() {
 
       {saveErr && (
         <div className="text-error bg-error-light rounded-lg px-3 py-2 text-sm">{saveErr}</div>
+      )}
+      {planNote && (
+        <div className="text-amber bg-cream rounded-lg px-3 py-2 text-sm">{planNote}</div>
       )}
 
       {/* Confirm plan */}
@@ -230,7 +236,7 @@ export default function PlanningPage() {
       <TentativeCard
         tentative={bundle.tentative}
         month={month}
-        categories={categories}
+        categories={categories.filter((c) => !c.auto_paid)}
         settings={settings}
         refresh={refresh}
       />
@@ -274,7 +280,7 @@ export default function PlanningPage() {
         open={fabOpen}
         onClose={() => setFabOpen(false)}
         month={month}
-        categories={categories}
+        categories={categories.filter((c) => !c.auto_paid)}
         settings={settings}
         refresh={refresh}
       />
